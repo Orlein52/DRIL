@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 540770318}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -621,6 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rooms: []
+  Mazes: []
 --- !u!4 &1243917070
 Transform:
   m_ObjectHideFlags: 0

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject [] Rooms;  
+    public GameObject[] Rooms;
+    public GameObject[] Mazes;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
