@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Maze
+  - Room
+  - Manager
   layers:
   - Default
   - TransparentFX

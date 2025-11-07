@@ -9,10 +9,11 @@ public class PlayerController : MonoBehaviour
     public int speed;
     public float inputY;
     public float inputX;
+    GameManager gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
 
@@ -36,5 +37,9 @@ public class PlayerController : MonoBehaviour
         inputY = InputAxis.y;
 
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
 
+        gameManager.RoomSpawn(collision.gameObject);
+    }
 }
