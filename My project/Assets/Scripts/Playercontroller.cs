@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
+        
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
 
@@ -35,11 +37,12 @@ public class PlayerController : MonoBehaviour
         Vector2 InputAxis = context.ReadValue<Vector2>();
         inputX = InputAxis.x;
         inputY = InputAxis.y;
-
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-
-        gameManager.RoomSpawn(collision.gameObject);
+        if (other.tag == "Room")
+        {
+            gameManager.RoomSpawn(other.gameObject);
+        }
     }
 }
