@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float inputY;
     public float inputX;
     GameManager gameManager;
+    Rooms room;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,11 +39,14 @@ public class PlayerController : MonoBehaviour
         inputX = InputAxis.x;
         inputY = InputAxis.y;
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
+        
         if (other.tag == "Room")
         {
-            gameManager.RoomSpawn(other.gameObject);
+            Debug.Log("hit");
+            room = other.gameObject.GetComponentInParent<Rooms>();
+            gameManager.RoomSpawn(room.gameObject);
         }
     }
 }

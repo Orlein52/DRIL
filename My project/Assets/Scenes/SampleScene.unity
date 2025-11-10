@@ -390,7 +390,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &540770319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,7 +815,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6065492106633972416, guid: cb73a4e2dfc17df49a463257564fa955, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.2
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 6065492106633972416, guid: cb73a4e2dfc17df49a463257564fa955, type: 3}
       propertyPath: m_LocalPosition.y
@@ -899,6 +899,10 @@ MonoBehaviour:
   badRoom: {fileID: 5685357201041614601, guid: 50938172464c79c4db6c6f974d0800a6, type: 3}
   bossRoom: {fileID: 1482130640699519477, guid: c0d423307a9fb8e4a81e952cc7515e64, type: 3}
   connector: {fileID: 0}
+  conNum: 0
+  floorsize: 100
+  bossChance: 0
+  chanceBoss: 0
 --- !u!4 &1243917070
 Transform:
   m_ObjectHideFlags: 0
@@ -914,7 +918,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1262374634075479227
+--- !u!1001 &1439393835
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -922,10 +926,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3663622763945551518, guid: acad374a310996043b936191ad94fa58, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5422329666695141068, guid: acad374a310996043b936191ad94fa58, type: 3}
       propertyPath: m_Name
       value: Room2
@@ -936,7 +936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5838579918832414367, guid: acad374a310996043b936191ad94fa58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.2
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 5838579918832414367, guid: acad374a310996043b936191ad94fa58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -970,10 +970,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5878134005468207580, guid: acad374a310996043b936191ad94fa58, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -991,17 +987,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room3
       objectReference: {fileID: 0}
-    - target: {fileID: 5796383727562660520, guid: 98fde8c85f84e6c40b71ed8e148776af, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6117781134673736839, guid: 98fde8c85f84e6c40b71ed8e148776af, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6117781134673736839, guid: 98fde8c85f84e6c40b71ed8e148776af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6117781134673736839, guid: 98fde8c85f84e6c40b71ed8e148776af, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1048,6 +1040,6 @@ SceneRoots:
   - {fileID: 540770322}
   - {fileID: 1243917070}
   - {fileID: 564884748}
-  - {fileID: 1262374634075479227}
   - {fileID: 4220316274016695400}
   - {fileID: 759360670}
+  - {fileID: 1439393835}
