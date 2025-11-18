@@ -14,29 +14,25 @@ public class PlayerController : MonoBehaviour
     GameObject room;
     public int exitNum;
     Vector3 mousePos;
-    Vector3 maybe;
-    Ray mayRay;
-    Quaternion slotRot;
     public GameObject weaponSlot;
+    Camera cam;
+    public GameObject tempHit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
-        slotRot = new Quaternion();
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
-        mayRay = new Ray(transform.position, Vector3.up);
-
+        cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        mousePos = Mouse.current.position.ReadValue();
-        maybe = mousePos - transform.position;
-        mayRay.direction = maybe;
-        slotRot = Quaternion.Euler(mayRay.direction);
-        weaponSlot.transform.rotation = slotRot;
+        mousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        float angleRad = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x);
+        float angleDeg = (180 / Mathf.PI) * angleRad - 0;
+        weaponSlot.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
         tempmove = rb.linearVelocity;
         tempmove.x = inputX * speed;
         tempmove.y = inputY * speed;
@@ -49,6 +45,14 @@ public class PlayerController : MonoBehaviour
         Vector2 InputAxis = context.ReadValue<Vector2>();
         inputX = InputAxis.x;
         inputY = InputAxis.y;
+    }
+    public void Attack(InputAction.CallbackContext context)
+    {
+        weaponSlot.transform.right = weaponSlot.transform.up;
+        weaponSlot.transform.position = (weaponSlot.transform.position - weaponSlot.transform.up);
+        GameObject a = Instantiate(tempHit, weaponSlot.transform.position, weaponSlot.transform.rotation);
+        Destroy(a, 2f);
+        weaponSlot.transform.position = (weaponSlot.transform.position + weaponSlot.transform.up);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
