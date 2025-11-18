@@ -11,21 +11,32 @@ public class PlayerController : MonoBehaviour
     public float inputY;
     public float inputX;
     GameManager gameManager;
-    Rooms room;
+    GameObject room;
+    public int exitNum;
+    Vector3 mousePos;
+    Vector3 maybe;
+    Ray mayRay;
+    Quaternion slotRot;
+    public GameObject weaponSlot;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
-        
+        slotRot = new Quaternion();
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
+        mayRay = new Ray(transform.position, Vector3.up);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        mousePos = Mouse.current.position.ReadValue();
+        maybe = mousePos - transform.position;
+        mayRay.direction = maybe;
+        slotRot = Quaternion.Euler(mayRay.direction);
+        weaponSlot.transform.rotation = slotRot;
         tempmove = rb.linearVelocity;
         tempmove.x = inputX * speed;
         tempmove.y = inputY * speed;
@@ -39,14 +50,16 @@ public class PlayerController : MonoBehaviour
         inputX = InputAxis.x;
         inputY = InputAxis.y;
     }
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
         if (other.tag == "Room")
         {
-            Debug.Log("hit");
-            room = other.gameObject.GetComponentInParent<Rooms>();
-            gameManager.RoomSpawn(room.gameObject);
+            room = other.gameObject;
+        }
+        if(other.tag == "Exit_N")
+        {
+            exitNum = 1;
+            gameManager.RoomSpawn(room);
         }
     }
 }

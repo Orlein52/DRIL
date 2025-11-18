@@ -8,23 +8,32 @@ public class GameManager : MonoBehaviour
     public GameObject[] mazes;
     public GameObject badRoom;
     public GameObject bossRoom;
+    public GameObject startRoom;
+    public GameObject[] exits;
+    PlayerController playerController;
+    Grid grid;
     Transform player;
     int roomNum;
     public GameObject connector;
     public int conNum;
-    Ray2D conRay;
     Rooms room;
     float dis;
     public float floorsize;
     bool bossSpawn;
     public float bossChance;
     public float chanceBoss;
-    Vector2 spawnLoc;
+    
+    Vector3 roomPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        grid = GetComponent<Grid>();
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         conNum = 0;
+        
+        Instantiate(rooms[1], roomPos, transform.rotation);
+        
     }
 
     // Update is called once per frame
@@ -32,77 +41,18 @@ public class GameManager : MonoBehaviour
     {
         dis = Vector2.Distance(player.transform.position, transform.position);
     }
-    public void RoomSpawn(GameObject currentRoom)
+    public void RoomSpawn(GameObject room)
     {
-        StartCoroutine("RoomStop");
-        room = currentRoom.GetComponent<Rooms>();
-        if (conNum < 4)
+        roomNum = Random.Range(0, 3);
+        if(playerController.exitNum == 1)
         {
-            bossChance = Random.Range(0, 100);
-            
-            roomNum = Random.Range(0, rooms.Length);
-            
-            connector = room.connectors[conNum];
-            
-            RaycastHit2D conRayHit = Physics2D.Raycast(connector.transform.position, connector.transform.up, 1f);
-            if (conRayHit)
-            {
-                
-                conNum++;
-                RoomSpawn(currentRoom);
-            }
-            if (!conRayHit)
-            {
-                
-                if (dis < floorsize && bossSpawn)
-                {
-                    GameObject r = Instantiate(rooms[roomNum].gameObject, connector.transform.position, transform.rotation);
-                    conNum++;
-                    RoomSpawn(currentRoom);
-                    room = r.gameObject.GetComponent<Rooms>();
-                    room.roomdisplace(currentRoom);
-                }
-                if (dis < floorsize &&  !bossSpawn)
-                {
-                    if (bossChance <= chanceBoss)
-                    {
-                        GameObject r = Instantiate(bossRoom.gameObject, connector.transform.position, transform.rotation);
-                        conNum++;
-                        RoomSpawn(currentRoom);
-                        bossSpawn = true;
-                        room = r.gameObject.GetComponent<Rooms>();
-                        room.roomdisplace(currentRoom);
-                    }
-                    if (bossChance > chanceBoss)
-                    {
-                        GameObject r = Instantiate(rooms[roomNum].gameObject, connector.transform.position, transform.rotation);
-                        conNum++;
-                        RoomSpawn(currentRoom);
-                        chanceBoss += 5;
-                        room = r.gameObject.GetComponent<Rooms>();
-                        room.roomdisplace(currentRoom);
-                    }
-
-                }
-                if (dis >= floorsize)
-                {
-                    Instantiate(badRoom, connector.transform.position, transform.rotation);
-                    conNum++;
-                    RoomSpawn(currentRoom);
-                }
-            }
-        }
-
-        if (conNum == 4)
-        {
-            conNum = 0;
+            Destroy(room);
+            exits[1].SetActive(false);
+            player.transform.position -= Vector3.up * 6;
+            Instantiate(rooms[roomNum], transform.position, transform.rotation);
         }
     }
-    IEnumerator RoomStop()
-    {
-        Debug.Log("called");
-        yield return new WaitForSeconds(1);
 
-    }
 }
+
 
