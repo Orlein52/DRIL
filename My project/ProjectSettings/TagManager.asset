@@ -7,6 +7,10 @@ TagManager:
   - Maze
   - Room
   - Manager
+  - Exit_N
+  - Exit_E
+  - Exit_S
+  - Exit_W
   layers:
   - Default
   - TransparentFX

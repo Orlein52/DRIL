@@ -11,21 +11,28 @@ public class PlayerController : MonoBehaviour
     public float inputY;
     public float inputX;
     GameManager gameManager;
-    Rooms room;
+    GameObject room;
+    public int exitNum;
+    Vector3 mousePos;
+    public GameObject weaponSlot;
+    Camera cam;
+    public GameObject tempHit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
-        
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
-
+        cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        mousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        float angleRad = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x);
+        float angleDeg = (180 / Mathf.PI) * angleRad - 0;
+        weaponSlot.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
         tempmove = rb.linearVelocity;
         tempmove.x = inputX * speed;
         tempmove.y = inputY * speed;
@@ -39,14 +46,24 @@ public class PlayerController : MonoBehaviour
         inputX = InputAxis.x;
         inputY = InputAxis.y;
     }
-    private void OnTriggerExit2D(Collider2D other)
+    public void Attack(InputAction.CallbackContext context)
     {
-        
+        weaponSlot.transform.right = weaponSlot.transform.up;
+        weaponSlot.transform.position = (weaponSlot.transform.position - weaponSlot.transform.up);
+        GameObject a = Instantiate(tempHit, weaponSlot.transform.position, weaponSlot.transform.rotation);
+        Destroy(a, 2f);
+        weaponSlot.transform.position = (weaponSlot.transform.position + weaponSlot.transform.up);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.tag == "Room")
         {
-            Debug.Log("hit");
-            room = other.gameObject.GetComponentInParent<Rooms>();
-            gameManager.RoomSpawn(room.gameObject);
+            room = other.gameObject;
+        }
+        if(other.tag == "Exit_N")
+        {
+            exitNum = 1;
+            gameManager.RoomSpawn(room);
         }
     }
 }
