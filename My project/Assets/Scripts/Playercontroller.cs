@@ -65,5 +65,20 @@ public class PlayerController : MonoBehaviour
             exitNum = 1;
             gameManager.RoomSpawn(room);
         }
+        if (other.tag == "Exit_S")
+        {
+            exitNum = 0;
+            gameManager.RoomSpawn(room);
+        }
+        if (other.tag == "Exit_W")
+        {
+            exitNum = 3;
+            gameManager.RoomSpawn(room);
+        }
+        if (other.tag == "Exit_E")
+        {
+            exitNum = 2;
+            gameManager.RoomSpawn(room);
+        }
     }
 }

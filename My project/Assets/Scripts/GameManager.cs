@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         conNum = 0;
         
-        Instantiate(rooms[1], roomPos, transform.rotation);
+        Instantiate(mazes[0], roomPos, transform.rotation);
         
     }
 
@@ -44,15 +44,45 @@ public class GameManager : MonoBehaviour
     public void RoomSpawn(GameObject room)
     {
         roomNum = Random.Range(0, 3);
-        if(playerController.exitNum == 1)
+        if (playerController.exitNum == 1)
         {
             Destroy(room);
-            exits[1].SetActive(false);
-            player.transform.position -= Vector3.up * 6;
-            Instantiate(rooms[roomNum], transform.position, transform.rotation);
+            exits[playerController.exitNum].SetActive(false);
+            player.transform.position -= Vector3.up * 50;
+            Instantiate(mazes[0], transform.position, transform.rotation);
+            StartCoroutine("Trigcool");
+
+        }
+        if (playerController.exitNum == 0)
+        {
+            Destroy(room);
+            exits[playerController.exitNum].SetActive(false);
+            player.transform.position += Vector3.up * 50;
+            Instantiate(mazes[0], transform.position, transform.rotation);
+            StartCoroutine("Trigcool");
+        }
+        if (playerController.exitNum == 3)
+        {
+            Destroy(room);
+            exits[playerController.exitNum].SetActive(false);
+            player.transform.position += Vector3.right * 80;
+            Instantiate(mazes[0], transform.position, transform.rotation);
+            StartCoroutine("Trigcool");
+        }
+        if (playerController.exitNum == 2)
+        {
+            Destroy(room);
+            exits[playerController.exitNum].SetActive(false);
+            player.transform.position += Vector3.left * 50;
+            Instantiate(mazes[0], transform.position, transform.rotation);
+            StartCoroutine("Trigcool");
         }
     }
-
+    IEnumerator Trigcool()
+    {
+        yield return new WaitForSeconds(10);
+        exits[playerController.exitNum].SetActive(true);
+    }
 }
 
 
