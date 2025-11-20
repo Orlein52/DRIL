@@ -11,6 +11,8 @@ TagManager:
   - Exit_E
   - Exit_S
   - Exit_W
+  - enemy
+  - boss
   layers:
   - Default
   - TransparentFX
