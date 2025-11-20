@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float inputY;
     public float inputX;
     GameManager gameManager;
-    GameObject room;
+    GameObject maze;
     public int exitNum;
     Vector3 mousePos;
     public GameObject weaponSlot;
@@ -56,29 +56,29 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Room")
+        if (other.tag == "Maze")
         {
-            room = other.gameObject;
+            maze = other.gameObject;
         }
         if(other.tag == "Exit_N")
         {
             exitNum = 1;
-            gameManager.RoomSpawn(room);
+            gameManager.MazeSpawn(maze);
         }
         if (other.tag == "Exit_S")
         {
             exitNum = 0;
-            gameManager.RoomSpawn(room);
+            gameManager.MazeSpawn(maze);
         }
         if (other.tag == "Exit_W")
         {
-            exitNum = 3;
-            gameManager.RoomSpawn(room);
+            exitNum = 2;
+            gameManager.MazeSpawn(maze);
         }
         if (other.tag == "Exit_E")
         {
-            exitNum = 2;
-            gameManager.RoomSpawn(room);
+            exitNum = 3;
+            gameManager.MazeSpawn(maze);
         }
     }
 }

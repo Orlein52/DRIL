@@ -41,46 +41,38 @@ public class GameManager : MonoBehaviour
     {
         dis = Vector2.Distance(player.transform.position, transform.position);
     }
-    public void RoomSpawn(GameObject room)
+    public void MazeSpawn(GameObject maze)
     {
-        roomNum = Random.Range(0, 3);
+        Destroy(maze);
+        exits[playerController.exitNum].SetActive(false);
         if (playerController.exitNum == 1)
         {
-            Destroy(room);
-            exits[playerController.exitNum].SetActive(false);
             player.transform.position -= Vector3.up * 50;
             Instantiate(mazes[0], transform.position, transform.rotation);
             StartCoroutine("Trigcool");
-
         }
         if (playerController.exitNum == 0)
         {
-            Destroy(room);
-            exits[playerController.exitNum].SetActive(false);
             player.transform.position += Vector3.up * 50;
             Instantiate(mazes[0], transform.position, transform.rotation);
             StartCoroutine("Trigcool");
         }
         if (playerController.exitNum == 3)
         {
-            Destroy(room);
-            exits[playerController.exitNum].SetActive(false);
-            player.transform.position += Vector3.right * 80;
+            player.transform.position += Vector3.left * 80;
             Instantiate(mazes[0], transform.position, transform.rotation);
             StartCoroutine("Trigcool");
         }
         if (playerController.exitNum == 2)
         {
-            Destroy(room);
-            exits[playerController.exitNum].SetActive(false);
-            player.transform.position += Vector3.left * 50;
+            player.transform.position += Vector3.right * 80;
             Instantiate(mazes[0], transform.position, transform.rotation);
             StartCoroutine("Trigcool");
         }
     }
     IEnumerator Trigcool()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(1);
         exits[playerController.exitNum].SetActive(true);
     }
 }
