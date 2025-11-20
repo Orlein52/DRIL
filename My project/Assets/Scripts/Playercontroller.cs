@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     public PlayerInput input;
     Vector2 tempmove;
     public int speed;
-    public float inputY;
-    public float inputX;
+    float inputY;
+    float inputX;
     GameManager gameManager;
     GameObject maze;
     public int exitNum;
@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public GameObject weaponSlot;
     Camera cam;
     public GameObject tempHit;
+    public float health;
+    public float tempdmg;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -79,6 +81,13 @@ public class PlayerController : MonoBehaviour
         {
             exitNum = 3;
             gameManager.MazeSpawn(maze);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            health -= 3;
         }
     }
 }
