@@ -1,9 +1,16 @@
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public int intelligence;
+    public int STR;
+    public int CON;
+    public int DEX;
+    public int defense;
+    public int magic_defense;
     Rigidbody2D rb;
     public PlayerInput input;
     Vector2 tempmove;
@@ -89,5 +96,11 @@ public class PlayerController : MonoBehaviour
         {
             health -= 3;
         }
+    }
+    void Start()
+    {
+        magic_defense = (2 * intelligence) + 10;
+        defense = (2 * STR) + 10;
+        health = (CON * 3) + 30;
     }
 }
