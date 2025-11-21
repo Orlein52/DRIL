@@ -58,9 +58,9 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Maze")
+        if (other.tag == "Enem_Proj")
         {
-            maze = other.gameObject;
+            health -= 3;
         }
         if(other.tag == "Exit_N")
         {
