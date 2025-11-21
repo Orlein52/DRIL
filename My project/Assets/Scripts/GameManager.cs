@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
             if (spawnRooms[0].tag == roomTag[0])
             {
                 roomNum = UnityEngine.Random.Range(0, bigRooms.Length);
-                Instantiate(bigRooms[roomNum], spawnRooms[0].transform.position, transform.rotation);
+                GameObject r = Instantiate(bigRooms[roomNum], spawnRooms[0].transform.position, transform.rotation);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
         }
