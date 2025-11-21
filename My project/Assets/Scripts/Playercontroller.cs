@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,6 +6,12 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
+    public int intelligence;
+    public int STR;
+    public int CON;
+    public int DEX;
+    public int defense;
+    public int magic_defense;
     Rigidbody2D rb;
     public PlayerInput input;
     Vector2 tempmove;
