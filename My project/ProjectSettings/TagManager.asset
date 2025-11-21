@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 3
   tags:
   - Maze
-  - Room
   - Manager
   - Exit_N
   - Exit_E
@@ -13,6 +12,10 @@ TagManager:
   - Exit_W
   - enemy
   - boss
+  - big room
+  - small room
+  - med room
+  - boss room
   layers:
   - Default
   - TransparentFX

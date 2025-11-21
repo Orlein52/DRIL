@@ -6805,6 +6805,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 184770566317637730, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: med room
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603452241759950729, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: big room
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965516629133346077, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: small room
+      objectReference: {fileID: 0}
     - target: {fileID: 5078742352415324570, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6845,9 +6857,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5964253189673719865, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: big room
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947559504469165164, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: small room
+      objectReference: {fileID: 0}
+    - target: {fileID: 7582830529667696250, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: med room
+      objectReference: {fileID: 0}
     - target: {fileID: 7610412119243285093, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
       propertyPath: m_Name
       value: maze tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803769301695355887, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: med room
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475382368722342848, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: boss room
+      objectReference: {fileID: 0}
+    - target: {fileID: 8740676448200678704, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: med room
+      objectReference: {fileID: 0}
+    - target: {fileID: 9205394416330786461, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: big room
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

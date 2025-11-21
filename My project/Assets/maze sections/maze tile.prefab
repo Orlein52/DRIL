@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 4933183280534149265}
   m_Layer: 0
   m_Name: room
-  m_TagString: Room
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2320,7 +2320,7 @@ GameObject:
   - component: {fileID: 1392919803116642343}
   m_Layer: 0
   m_Name: corner room
-  m_TagString: Room
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4629,7 +4629,7 @@ GameObject:
   - component: {fileID: 4983245251040721487}
   m_Layer: 0
   m_Name: room
-  m_TagString: Room
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5196,7 +5196,7 @@ GameObject:
   - component: {fileID: 1911640699408269337}
   m_Layer: 0
   m_Name: entry/exit room
-  m_TagString: Room
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6433,7 +6433,7 @@ GameObject:
   - component: {fileID: 407470275731023469}
   m_Layer: 0
   m_Name: hidden room
-  m_TagString: Room
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7355,7 +7355,7 @@ GameObject:
   - component: {fileID: 73526416942272742}
   m_Layer: 0
   m_Name: room
-  m_TagString: Room
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7946,7 +7946,7 @@ GameObject:
   - component: {fileID: 513896729732931328}
   m_Layer: 0
   m_Name: room
-  m_TagString: Room
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9348,7 +9348,7 @@ GameObject:
   - component: {fileID: 1341060648499430303}
   m_Layer: 0
   m_Name: room
-  m_TagString: Room
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9781,7 +9781,7 @@ GameObject:
   - component: {fileID: 4326111229463100992}
   m_Layer: 0
   m_Name: corner room
-  m_TagString: Room
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
