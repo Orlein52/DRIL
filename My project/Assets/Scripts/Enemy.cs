@@ -33,18 +33,18 @@ public class Enemy : MonoBehaviour
         float angleRad = Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x);
         float angleDeg = (180 / Mathf.PI) * angleRad - 0;
         transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
+        direction = (player.transform.position - transform.position);
         if (!ranged)
         {
-            direction = (player.transform.position - transform.position);
             rb.linearVelocity = (direction * speed);
         }
         if (ranged && !fired)
         {
             fired = true;
             perchance = transform.position - player.transform.position;
-            maybe = new Ray(player.transform.position, perchance);
+            maybe = new Ray(transform.position, direction);
             GameObject p = Instantiate(proj, transform.position, transform.rotation);
-            p.GetComponent<Rigidbody>().AddForce(Vector3.forward);
+            p.GetComponent<Rigidbody2D>().linearVelocity = (maybe.direction);
             Destroy(p, 3);
             StartCoroutine("fireCooldown");
         }

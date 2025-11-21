@@ -15,6 +15,7 @@ TagManager:
   - boss
   - Enemy
   - Attack
+  - Enem_Proj
   layers:
   - Default
   - TransparentFX
