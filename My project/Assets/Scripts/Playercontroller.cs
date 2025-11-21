@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     bool cool;
     bool atking;
     public float rof;
+    public bool maybe = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -81,23 +82,27 @@ public class PlayerController : MonoBehaviour
         {
             health -= 3;
         }
-        if(other.tag == "Exit_N")
+        if(other.tag == "Exit_N" && !maybe)
         {
+            maybe = true;
             exitNum = 1;
             gameManager.MazeSpawn(maze);
         }
-        if (other.tag == "Exit_S")
+        if (other.tag == "Exit_S" && !maybe)
         {
+            maybe = true;
             exitNum = 0;
             gameManager.MazeSpawn(maze);
         }
-        if (other.tag == "Exit_W")
+        if (other.tag == "Exit_W" && !maybe)
         {
+            maybe = true;
             exitNum = 2;
             gameManager.MazeSpawn(maze);
         }
-        if (other.tag == "Exit_E")
+        if (other.tag == "Exit_E" && !maybe)
         {
+            maybe = true;
             exitNum = 3;
             gameManager.MazeSpawn(maze);
         }
