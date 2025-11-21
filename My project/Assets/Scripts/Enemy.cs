@@ -17,13 +17,12 @@ public class Enemy : MonoBehaviour
     public float rof;
     Rigidbody2D rb;
     Vector2 direction;
-    Quaternion rot;
+    public float firepow;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
         rb = GetComponent<Rigidbody2D>();
-        rot = new Quaternion();
         plyr = player.GetComponent<PlayerController>();
     }
 
@@ -44,7 +43,7 @@ public class Enemy : MonoBehaviour
             perchance = transform.position - player.transform.position;
             maybe = new Ray(transform.position, direction);
             GameObject p = Instantiate(proj, transform.position, transform.rotation);
-            p.GetComponent<Rigidbody2D>().linearVelocity = (maybe.direction);
+            p.GetComponent<Rigidbody2D>().linearVelocity = (maybe.direction * firepow);
             Destroy(p, 3);
             StartCoroutine("fireCooldown");
         }
