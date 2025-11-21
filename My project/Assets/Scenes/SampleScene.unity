@@ -280,6 +280,7 @@ MonoBehaviour:
   speed: 2
   health: 12
   rof: 0.5
+  firepow: 5
 --- !u!212 &517791605
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -581,6 +582,7 @@ MonoBehaviour:
   tempHit: {fileID: 1722656276147000784, guid: 7eb57077b168a6347aac300b4a1706fe, type: 3}
   health: 0
   tempdmg: 6
+  rof: 0
 --- !u!114 &540770320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,7 +1003,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1243917070}
   - component: {fileID: 1243917069}
-  - component: {fileID: 1243917071}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Manager
@@ -1021,10 +1022,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0406cd8d3af4f24093a6e4a8c26ef2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rooms:
-  - {fileID: 7672880460178507724, guid: cb73a4e2dfc17df49a463257564fa955, type: 3}
-  - {fileID: 5422329666695141068, guid: acad374a310996043b936191ad94fa58, type: 3}
-  - {fileID: 3647824315809496405, guid: 98fde8c85f84e6c40b71ed8e148776af, type: 3}
+  smallRooms: []
+  medRooms: []
+  bigRooms: []
   mazes:
   - {fileID: 7610412119243285093, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
   badRoom: {fileID: 5685357201041614601, guid: 50938172464c79c4db6c6f974d0800a6, type: 3}
@@ -1040,6 +1040,11 @@ MonoBehaviour:
   floorsize: 100
   bossChance: 0
   chanceBoss: 0
+  roomTag:
+  - big room
+  - small room
+  - med room
+  - boss room
 --- !u!4 &1243917070
 Transform:
   m_ObjectHideFlags: 0
@@ -1059,18 +1064,6 @@ Transform:
   - {fileID: 1459734225}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!156049354 &1243917071
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243917068}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 1}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
 --- !u!1 &1459734224
 GameObject:
   m_ObjectHideFlags: 0
