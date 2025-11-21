@@ -1,17 +1,21 @@
+using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] rooms;
+    public GameObject[] smallRooms;
+    public GameObject[] medRooms;
+    public GameObject[] bigRooms;
     public GameObject[] mazes;
     public GameObject badRoom;
     public GameObject bossRoom;
     public GameObject startRoom;
     public GameObject[] exits;
     PlayerController playerController;
-    Grid grid;
+    GameObject[] spawnRooms;
     Transform player;
     int roomNum;
     public GameObject connector;
@@ -22,12 +26,13 @@ public class GameManager : MonoBehaviour
     bool bossSpawn;
     public float bossChance;
     public float chanceBoss;
-    
+    public string[] roomTag;
+    int tagNum;
     Vector3 roomPos;
+    bool roomCollect;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        grid = GetComponent<Grid>();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         conNum = 0;
@@ -40,11 +45,21 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         dis = Vector2.Distance(player.transform.position, transform.position);
+        if (tagNum == roomTag.Length)
+        {
+            tagNum = 0;
+            roomCollect = true;
+        }
+        if (!roomCollect)
+        {
+            spawnRooms = GameObject.FindGameObjectsWithTag(roomTag[tagNum]);
+            tagNum++;
+        }
     }
     public void MazeSpawn(GameObject maze)
     {
         Destroy(maze);
-        exits[playerController.exitNum].SetActive(false);
+        exits[playerController.exitNum].GetComponent<Collider2D>().isTrigger = false;
         if (playerController.exitNum == 1)
         {
             player.transform.position -= Vector3.up * 50;
@@ -69,11 +84,25 @@ public class GameManager : MonoBehaviour
             Instantiate(mazes[0], transform.position, transform.rotation);
             StartCoroutine("Trigcool");
         }
+        RoomSpawn();
+    }
+    public void RoomSpawn()
+    {
+        
+        if (spawnRooms.Length > 0)
+        {
+            if (spawnRooms[0].tag == roomTag[0])
+            {
+                roomNum = UnityEngine.Random.Range(0, bigRooms.Length);
+                Instantiate(bigRooms[roomNum], spawnRooms[0].transform.position, transform.rotation);
+                ArrayUtility.RemoveAt(ref spawnRooms, 0);
+            }
+        }
     }
     IEnumerator Trigcool()
     {
         yield return new WaitForSeconds(1);
-        exits[playerController.exitNum].SetActive(true);
+        exits[playerController.exitNum].GetComponent<Collider2D>().isTrigger = true;
     }
 }
 

@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class PlayerController : MonoBehaviour
     public GameObject tempHit;
     public float health;
     public float tempdmg;
+    bool cool;
+    bool atking;
+    public float rof;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,11 +46,23 @@ public class PlayerController : MonoBehaviour
         float angleRad = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x);
         float angleDeg = (180 / Mathf.PI) * angleRad - 0;
         weaponSlot.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
+        
         tempmove = rb.linearVelocity;
         tempmove.x = inputX * speed;
         tempmove.y = inputY * speed;
         rb.linearVelocityX = (tempmove.x);
         rb.linearVelocityY = (tempmove.y);
+
+        if (!cool && atking)
+        {
+            cool = true;
+            weaponSlot.transform.right = weaponSlot.transform.up;
+            weaponSlot.transform.position = (weaponSlot.transform.position - weaponSlot.transform.up);
+            GameObject a = Instantiate(tempHit, weaponSlot.transform.position, weaponSlot.transform.rotation);
+            Destroy(a, 2f);
+            weaponSlot.transform.position = (weaponSlot.transform.position + weaponSlot.transform.up);
+            StartCoroutine("Atkcool");
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -57,11 +73,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Attack(InputAction.CallbackContext context)
     {
-        weaponSlot.transform.right = weaponSlot.transform.up;
-        weaponSlot.transform.position = (weaponSlot.transform.position - weaponSlot.transform.up);
-        GameObject a = Instantiate(tempHit, weaponSlot.transform.position, weaponSlot.transform.rotation);
-        Destroy(a, 2f);
-        weaponSlot.transform.position = (weaponSlot.transform.position + weaponSlot.transform.up);
+        atking = true;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -97,10 +109,16 @@ public class PlayerController : MonoBehaviour
             health -= 3;
         }
     }
-    void Start()
+    private void OnCollisionStay2D(Collision2D other)
     {
-        magic_defense = (2 * intelligence) + 10;
-        defense = (2 * STR) + 10;
-        health = (CON * 3) + 30;
+        if (other.gameObject.tag == "Maze")
+        {
+            maze = other.gameObject;
+        }
+    }
+    IEnumerator Atkcool()
+    {
+        yield return new WaitForSeconds(rof);
+        cool = false;
     }
 }
