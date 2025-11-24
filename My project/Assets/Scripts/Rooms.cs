@@ -15,9 +15,6 @@ public class Rooms : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spawned)
-        {
-            gameObject.tag = "Room";
-        }
+
     }
 }

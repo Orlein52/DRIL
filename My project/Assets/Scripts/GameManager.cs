@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             roomCollect = true;
             spawned = true;
         }
-        if (!roomCollect)
+        if (spawnRooms.Length <= 0)
         {
             spawnRooms = GameObject.FindGameObjectsWithTag(roomTag[tagNum]);
             tagNum++;
@@ -102,34 +102,26 @@ public class GameManager : MonoBehaviour
         {
             if (spawnRooms[0].tag == roomTag[0])
             {
-                roomNum = UnityEngine.Random.Range(0, bigRooms.Length);
-                GameObject r = Instantiate(bigRooms[roomNum], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
+                //roomNum = UnityEngine.Random.Range(0, bigRooms.Length);
+                GameObject r = Instantiate(bigRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
-                room = r.GetComponent<Rooms>();
-                room.spawned = true;
             }
             if (spawnRooms[0].tag == roomTag[1])
             {
-                roomNum = UnityEngine.Random.Range(0, smallRooms.Length);
-                GameObject r = Instantiate(smallRooms[roomNum], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
+                //roomNum = UnityEngine.Random.Range(0, smallRooms.Length);
+                GameObject r = Instantiate(smallRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
-                room = r.GetComponent<Rooms>();
-                room.spawned = true;
             }
             if (spawnRooms[0].tag == roomTag[2])
             {
-                roomNum = UnityEngine.Random.Range(0, medRooms.Length);
-                GameObject r = Instantiate(medRooms[roomNum], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
+                //roomNum = UnityEngine.Random.Range(0, medRooms.Length);
+                GameObject r = Instantiate(medRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
-                room = r.GetComponent<Rooms>();
-                room.spawned = true;
             }
             if (spawnRooms[0].tag == roomTag[3])
             {
                 GameObject r = Instantiate(bossRoom, spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
-                room = r.GetComponent<Rooms>();
-                room.spawned = true;
             }
         }
         if (spawnRooms.Length == 0)

@@ -588,7 +588,7 @@ MonoBehaviour:
   tempHit: {fileID: 1722656276147000784, guid: 7eb57077b168a6347aac300b4a1706fe, type: 3}
   health: 0
   tempdmg: 6
-  rof: 0
+  rof: 1
   maybe: 0
 --- !u!114 &540770320
 MonoBehaviour:

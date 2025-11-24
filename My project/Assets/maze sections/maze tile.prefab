@@ -312,8 +312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba70f78a5586084f9c07be8b22df581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  room: {fileID: 0}
   spawned: 0
 --- !u!1 &391576199155446535
 GameObject:
@@ -2369,8 +2367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba70f78a5586084f9c07be8b22df581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  room: {fileID: 0}
   spawned: 0
 --- !u!1 &2842934912007385001
 GameObject:
@@ -4694,8 +4690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba70f78a5586084f9c07be8b22df581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  room: {fileID: 0}
   spawned: 0
 --- !u!1 &5116501300700678522
 GameObject:
@@ -5277,8 +5271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba70f78a5586084f9c07be8b22df581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  room: {fileID: 0}
   spawned: 0
 --- !u!1 &6342913434063052422
 GameObject:
@@ -6530,8 +6522,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba70f78a5586084f9c07be8b22df581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  room: {fileID: 0}
   spawned: 0
 --- !u!1 &7024827405093494519
 GameObject:
@@ -7468,8 +7458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba70f78a5586084f9c07be8b22df581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  room: {fileID: 0}
   spawned: 0
 --- !u!1 &7610412119243285093
 GameObject:
@@ -8075,8 +8063,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba70f78a5586084f9c07be8b22df581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  room: {fileID: 0}
   spawned: 0
 --- !u!1 &8088948769598130671
 GameObject:
@@ -8908,7 +8894,7 @@ Transform:
   m_GameObject: {fileID: 8475382368722342848}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.1, y: -17.14, z: 0}
+  m_LocalPosition: {x: 24.49, y: -17.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8926,8 +8912,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba70f78a5586084f9c07be8b22df581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  room: {fileID: 0}
   spawned: 0
 --- !u!1 &8519094539199491282
 GameObject:
@@ -9509,8 +9493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba70f78a5586084f9c07be8b22df581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  room: {fileID: 0}
   spawned: 0
 --- !u!1 &8978569694024080838
 GameObject:
@@ -9958,6 +9940,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba70f78a5586084f9c07be8b22df581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dis: 0
-  room: {fileID: 0}
   spawned: 0
