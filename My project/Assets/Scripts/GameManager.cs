@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     public string[] roomTag;
     int tagNum;
     Vector3 roomPos;
-    bool roomCollect;
     bool spawned;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,14 +48,12 @@ public class GameManager : MonoBehaviour
         if (tagNum == roomTag.Length)
         {
             tagNum = 0;
-            roomCollect = true;
             spawned = true;
         }
         if (spawnRooms.Length <= 0)
         {
             spawnRooms = GameObject.FindGameObjectsWithTag(roomTag[tagNum]);
             tagNum++;
-            roomCollect = true;
         }
         if (!spawned)
         {
@@ -97,7 +94,6 @@ public class GameManager : MonoBehaviour
     }
     public void RoomSpawn()
     {
-        roomCollect = false;
         if (spawnRooms.Length > 0)
         {
             if (spawnRooms[0].tag == roomTag[0])
@@ -123,10 +119,6 @@ public class GameManager : MonoBehaviour
                 GameObject r = Instantiate(bossRoom, spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
-        }
-        if (spawnRooms.Length == 0)
-        {
-            roomCollect = false;
         }
     }
     IEnumerator Trigcool()
