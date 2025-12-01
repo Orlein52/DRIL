@@ -575,6 +575,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf459b758f762864f8de4e4de1d1037f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  intelligence: 0
+  STR: 0
+  CON: 0
+  DEX: 0
+  defense: 0
+  magic_defense: 0
   input: {fileID: 0}
   speed: 5
   exitNum: 0
@@ -582,7 +588,8 @@ MonoBehaviour:
   tempHit: {fileID: 1722656276147000784, guid: 7eb57077b168a6347aac300b4a1706fe, type: 3}
   health: 0
   tempdmg: 6
-  rof: 0
+  rof: 1
+  maybe: 0
 --- !u!114 &540770320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1022,19 +1029,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0406cd8d3af4f24093a6e4a8c26ef2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallRooms: []
-  medRooms: []
-  bigRooms: []
+  smallRooms:
+  - {fileID: 9017284644928122174, guid: 190a5aa9397921049b075de5af6e8576, type: 3}
+  medRooms:
+  - {fileID: 2303792112995190139, guid: 4bc550e7d7be5d0418a54aebceb0690e, type: 3}
+  bigRooms:
+  - {fileID: 4139356147427721513, guid: 0a8584ee067d2504f8db57ca5f733355, type: 3}
   mazes:
   - {fileID: 7610412119243285093, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
   badRoom: {fileID: 5685357201041614601, guid: 50938172464c79c4db6c6f974d0800a6, type: 3}
-  bossRoom: {fileID: 1482130640699519477, guid: c0d423307a9fb8e4a81e952cc7515e64, type: 3}
+  bossRoom: {fileID: 7516282777953954970, guid: 70fd31a0d5c8c96479b37182cbef619c, type: 3}
   startRoom: {fileID: 0}
   exits:
   - {fileID: 1801818328}
   - {fileID: 398997852}
   - {fileID: 1459734224}
   - {fileID: 839833926}
+  spawnRooms: []
   connector: {fileID: 0}
   conNum: 0
   floorsize: 100

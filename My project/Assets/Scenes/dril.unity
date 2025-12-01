@@ -567,8 +567,13 @@ MonoBehaviour:
   health: 0
   tempdmg: 0
   rof: 0
+<<<<<<< HEAD
 --- !u!1 &1669481472
 GameObject:
+=======
+--- !u!1001 &894597592
+PrefabInstance:
+>>>>>>> 5bf2476d0aa2f719c8f813ac19d66bc47bf47ff2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1094,6 +1099,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< HEAD
+=======
+    - target: {fileID: 184770566317637730, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: med room
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392919803116642343, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -31.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392919803116642343, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603452241759950729, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: big room
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326111229463100992, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -14.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965516629133346077, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
+      propertyPath: m_TagString
+      value: med room
+      objectReference: {fileID: 0}
+>>>>>>> 5bf2476d0aa2f719c8f813ac19d66bc47bf47ff2
     - target: {fileID: 5078742352415324570, guid: 90066597264e61a4a9d07a6767f190ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
