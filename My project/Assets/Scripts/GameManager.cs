@@ -67,25 +67,25 @@ public class GameManager : MonoBehaviour
         exits[playerController.exitNum].GetComponent<Collider2D>().isTrigger = false;
         if (playerController.exitNum == 1)
         {
-            player.transform.position -= Vector3.up * 48;
+            player.transform.position -= Vector3.up * 50;
             Instantiate(mazes[0], transform.position, transform.rotation);
             StartCoroutine("Trigcool");
         }
         if (playerController.exitNum == 0)
         {
-            player.transform.position += Vector3.up * 48;
+            player.transform.position += Vector3.up * 50;
             Instantiate(mazes[0], transform.position, transform.rotation);
             StartCoroutine("Trigcool");
         }
         if (playerController.exitNum == 3)
         {
-            player.transform.position += Vector3.left * 80;
+            player.transform.position += Vector3.left * 50;
             Instantiate(mazes[0], transform.position, transform.rotation);
             StartCoroutine("Trigcool");
         }
         if (playerController.exitNum == 2)
         {
-            player.transform.position += Vector3.right * 80;
+            player.transform.position += Vector3.right * 50;
             Instantiate(mazes[0], transform.position, transform.rotation);
             StartCoroutine("Trigcool");
         }
