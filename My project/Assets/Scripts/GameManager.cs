@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
             RoomSpawn();
         }
     }
-    public void MazeSpawn(GameObject maze)
+    public void MazeSpawn()
     {
         ArrayUtility.Clear(ref spawnRooms);
         Destroy(m);
@@ -99,19 +99,19 @@ public class GameManager : MonoBehaviour
         {
             if (spawnRooms[0].tag == roomTag[0])
             {
-                //roomNum = UnityEngine.Random.Range(0, bigRooms.Length);
+                roomNum = UnityEngine.Random.Range(0, bigRooms.Length - 1);
                 GameObject r = Instantiate(bigRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
             if (spawnRooms[0].tag == roomTag[1])
             {
-                //roomNum = UnityEngine.Random.Range(0, smallRooms.Length);
+                roomNum = UnityEngine.Random.Range(0, smallRooms.Length - 1);
                 GameObject r = Instantiate(smallRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
             if (spawnRooms[0].tag == roomTag[2])
             {
-                //roomNum = UnityEngine.Random.Range(0, medRooms.Length);
+                roomNum = UnityEngine.Random.Range(0, medRooms.Length - 1);
                 GameObject r = Instantiate(medRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using static UnityEngine.Rendering.DebugUI.Table;
+using UnityEditor;
 
 public class Enemy : MonoBehaviour
 {
@@ -17,10 +18,10 @@ public class Enemy : MonoBehaviour
     public float rof;
     Rigidbody2D rb;
     Vector2 direction;
-    float dis;
     public float firepow;
     public int detectDis;
-    bool detected;
+    Rooms rooms;
+    bool a;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,31 +37,30 @@ public class Enemy : MonoBehaviour
         float angleDeg = (180 / Mathf.PI) * angleRad - 0;
         transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
         direction = (player.transform.position - transform.position);
-        dis = Vector3.Distance(transform.position, player.transform.position);
-        if(dis<=detectDis)
+        if (a)
         {
-            detected = true;
+            if (rooms.d)
+            {
+                if (!ranged)
+                {
+                    rb.linearVelocity = (direction * speed);
+                }
+                if (ranged && !fired)
+                {
+                    fired = true;
+                    perchance = transform.position - player.transform.position;
+                    maybe = new Ray(transform.position, direction);
+                    GameObject p = Instantiate(proj, transform.position, transform.rotation);
+                    p.GetComponent<Rigidbody2D>().linearVelocity = (maybe.direction * firepow);
+                    Destroy(p, 3);
+                    StartCoroutine("fireCooldown");
+                }
+            }
         }
-        if(detected)
+        if (health <= 0)
         {
-            if (!ranged)
-            {
-                rb.linearVelocity = (direction * speed);
-            }
-            if (ranged && !fired)
-            {
-                fired = true;
-                perchance = transform.position - player.transform.position;
-                maybe = new Ray(transform.position, direction);
-                GameObject p = Instantiate(proj, transform.position, transform.rotation);
-                p.GetComponent<Rigidbody2D>().linearVelocity = (maybe.direction * firepow);
-                Destroy(p, 3);
-                StartCoroutine("fireCooldown");
-            }
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
+            ArrayUtility.Remove(ref rooms.enemies, gameObject);
+            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -68,6 +68,12 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Attack")
         {
             health -= plyr.tempdmg;
+        }
+        if (other.tag == "Room")
+        {
+            rooms = other.gameObject.GetComponent<Rooms>();
+            ArrayUtility.Add(ref rooms.enemies, gameObject);
+            a = true;
         }
     }
     IEnumerator fireCooldown()

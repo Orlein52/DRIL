@@ -86,25 +86,30 @@ public class PlayerController : MonoBehaviour
         {
             maybe = true;
             exitNum = 1;
-            gameManager.MazeSpawn(maze);
+            gameManager.MazeSpawn();
         }
         if (other.tag == "Exit_S" && !maybe)
         {
             maybe = true;
             exitNum = 0;
-            gameManager.MazeSpawn(maze);
+            gameManager.MazeSpawn();
         }
         if (other.tag == "Exit_W" && !maybe)
         {
             maybe = true;
             exitNum = 2;
-            gameManager.MazeSpawn(maze);
+            gameManager.MazeSpawn();
         }
         if (other.tag == "Exit_E" && !maybe)
         {
             maybe = true;
             exitNum = 3;
-            gameManager.MazeSpawn(maze);
+            gameManager.MazeSpawn();
+        }
+        if (other.tag == "Room")
+        {
+            Rooms r = other.gameObject.GetComponent<Rooms>();
+            r.RoomStart();
         }
     }
     private void OnCollisionEnter2D(Collision2D other)
@@ -112,13 +117,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             health -= 3;
-        }
-    }
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Maze")
-        {
-            maze = other.gameObject;
         }
     }
     IEnumerator Atkcool()

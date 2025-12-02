@@ -5,7 +5,12 @@ using UnityEngine;
 public class Rooms : MonoBehaviour
 {
     GameManager gameManager;
-    public bool spawned;
+    public GameObject[] enemies;
+    bool a;
+    public bool d;
+    public GameObject[] seals;
+    public int sealNum;
+    public bool b;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,6 +20,34 @@ public class Rooms : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (enemies.Length > 0)
+        {
+            a = true;
+        }
+        if (a && enemies.Length <= 0)
+        {
+            RoomDone();
+        }
+        if (d && sealNum < seals.Length)
+        {
+            seals[sealNum].SetActive(true);
+            sealNum++;
+        }
+        if (b && sealNum < seals.Length)
+        {
+            seals[sealNum].SetActive(false);
+            sealNum++;
+        }
+    }
+    public void RoomStart()
+    {
+        d = true;
+    }
+    public void RoomDone()
+    {
+        d = false;
+        b = true;
+        a= false;
+        sealNum = 0;
     }
 }
