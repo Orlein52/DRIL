@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     int tagNum;
     Vector3 roomPos;
     bool spawned;
+    GameObject m;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         conNum = 0;
         
-        Instantiate(mazes[0], roomPos, transform.rotation);
+        m = Instantiate(mazes[0], roomPos, transform.rotation);
         
     }
 
@@ -63,12 +64,12 @@ public class GameManager : MonoBehaviour
     public void MazeSpawn(GameObject maze)
     {
         ArrayUtility.Clear(ref spawnRooms);
-        Destroy(maze);
+        Destroy(m);
         exits[playerController.exitNum].GetComponent<Collider2D>().isTrigger = false;
         if (playerController.exitNum == 1)
         {
             player.transform.position -= Vector3.up * 50;
-            Instantiate(mazes[0], transform.position, transform.rotation);
+            m = Instantiate(mazes[0], transform.position, transform.rotation);
             StartCoroutine("Trigcool");
         }
         if (playerController.exitNum == 0)
@@ -99,24 +100,24 @@ public class GameManager : MonoBehaviour
             if (spawnRooms[0].tag == roomTag[0])
             {
                 //roomNum = UnityEngine.Random.Range(0, bigRooms.Length);
-                GameObject r = Instantiate(bigRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
+                GameObject r = Instantiate(bigRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
             if (spawnRooms[0].tag == roomTag[1])
             {
                 //roomNum = UnityEngine.Random.Range(0, smallRooms.Length);
-                GameObject r = Instantiate(smallRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
+                GameObject r = Instantiate(smallRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
             if (spawnRooms[0].tag == roomTag[2])
             {
                 //roomNum = UnityEngine.Random.Range(0, medRooms.Length);
-                GameObject r = Instantiate(medRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
+                GameObject r = Instantiate(medRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
             if (spawnRooms[0].tag == roomTag[3])
             {
-                GameObject r = Instantiate(bossRoom, spawnRooms[0].transform.position, spawnRooms[0].transform.rotation);
+                GameObject r = Instantiate(bossRoom, spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
         }

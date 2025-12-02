@@ -17,7 +17,10 @@ public class Enemy : MonoBehaviour
     public float rof;
     Rigidbody2D rb;
     Vector2 direction;
+    float dis;
     public float firepow;
+    public int detectDis;
+    bool detected;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,23 +36,31 @@ public class Enemy : MonoBehaviour
         float angleDeg = (180 / Mathf.PI) * angleRad - 0;
         transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
         direction = (player.transform.position - transform.position);
-        if (!ranged)
+        dis = Vector3.Distance(transform.position, player.transform.position);
+        if(dis<=detectDis)
         {
-            rb.linearVelocity = (direction * speed);
+            detected = true;
         }
-        if (ranged && !fired)
+        if(detected)
         {
-            fired = true;
-            perchance = transform.position - player.transform.position;
-            maybe = new Ray(transform.position, direction);
-            GameObject p = Instantiate(proj, transform.position, transform.rotation);
-            p.GetComponent<Rigidbody2D>().linearVelocity = (maybe.direction * firepow);
-            Destroy(p, 3);
-            StartCoroutine("fireCooldown");
-        }
-        if (health <= 0)
-        {
-            Destroy(gameObject);
+            if (!ranged)
+            {
+                rb.linearVelocity = (direction * speed);
+            }
+            if (ranged && !fired)
+            {
+                fired = true;
+                perchance = transform.position - player.transform.position;
+                maybe = new Ray(transform.position, direction);
+                GameObject p = Instantiate(proj, transform.position, transform.rotation);
+                p.GetComponent<Rigidbody2D>().linearVelocity = (maybe.direction * firepow);
+                Destroy(p, 3);
+                StartCoroutine("fireCooldown");
+            }
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
