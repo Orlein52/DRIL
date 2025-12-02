@@ -16,6 +16,10 @@ TagManager:
   - small room
   - med room
   - boss room
+  - Enemy
+  - Enem_Proj
+  - Attack
+  - Room
   layers:
   - Default
   - TransparentFX
