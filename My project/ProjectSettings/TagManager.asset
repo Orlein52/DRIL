@@ -20,6 +20,7 @@ TagManager:
   - Enem_Proj
   - Attack
   - Room
+  - UI_Sel
   layers:
   - Default
   - TransparentFX

@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
     public PlayerInput input;
     Vector2 tempmove;
     public int speed;
-    float inputY;
-    float inputX;
+    public float inputY;
+    public float inputX;
     GameManager gameManager;
     GameObject maze;
     public int exitNum;
@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     bool atking;
     public float rof;
     public bool maybe = false;
+    GameObject a;
+    Vector3 displace;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
         cam = Camera.main;
+
     }
 
     // Update is called once per frame
@@ -54,15 +57,20 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocityX = (tempmove.x);
         rb.linearVelocityY = (tempmove.y);
 
-        if (!cool && atking)
+        if (atking && !cool)
         {
             cool = true;
             weaponSlot.transform.right = weaponSlot.transform.up;
             weaponSlot.transform.position = (weaponSlot.transform.position - weaponSlot.transform.up);
-            GameObject a = Instantiate(tempHit, weaponSlot.transform.position, weaponSlot.transform.rotation);
+            a = Instantiate(tempHit, weaponSlot.transform.position, weaponSlot.transform.rotation, transform);
+            a.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
             Destroy(a, 2f);
             weaponSlot.transform.position = (weaponSlot.transform.position + weaponSlot.transform.up);
             StartCoroutine("Atkcool");
+        }
+        if (atking)
+        {
+            a.transform.RotateAround(weaponSlot.transform.position, Vector3.forward, angleDeg);
         }
     }
 

@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,8 +18,9 @@ public class GameManager : MonoBehaviour
     public GameObject[] exits;
     PlayerController playerController;
     public GameObject[] spawnRooms;
+    public GameObject[] players;
     Transform player;
-    int roomNum;
+    float roomNum;
     public GameObject connector;
     public int conNum;
     Rooms room;
@@ -31,70 +34,84 @@ public class GameManager : MonoBehaviour
     Vector3 roomPos;
     bool spawned;
     GameObject m;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public int playerNum;
+    public int floorNum;
+    float roomCount;
+    //a is finding out if you have picked a character
+    bool a;
+    GameObject charSel;
     void Start()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         conNum = 0;
-        
-        m = Instantiate(mazes[0], roomPos, transform.rotation);
-        
+        charSel = GameObject.FindGameObjectWithTag("UI_Sel");
     }
-
-    // Update is called once per frame
     void Update()
     {
-        dis = Vector2.Distance(player.transform.position, transform.position);
-        if (tagNum == roomTag.Length)
+        if (a)
         {
-            tagNum = 0;
-            spawned = true;
-        }
-        if (spawnRooms.Length <= 0)
-        {
-            spawnRooms = GameObject.FindGameObjectsWithTag(roomTag[tagNum]);
-            tagNum++;
-        }
-        if (!spawned)
-        {
-            RoomSpawn();
+            if (floorNum == 0)
+            {
+                m = Instantiate(mazes[0], roomPos, transform.rotation);
+                floorNum++;
+            }
+            dis = Vector2.Distance(player.transform.position, transform.position);
+
+            if (tagNum == roomTag.Length && !spawned)
+            {
+                tagNum = 0;
+                spawned = true;
+            }
+            if (spawnRooms.Length <= 0 && !spawned)
+            {
+                spawnRooms = GameObject.FindGameObjectsWithTag(roomTag[tagNum]);
+                tagNum++;
+                roomCount += spawnRooms.Length;
+                RoomSpawn();
+            }
+            if (!spawned && spawnRooms.Length > 0)
+            {
+                RoomSpawn();
+            }
         }
     }
     public void MazeSpawn()
     {
-        ArrayUtility.Clear(ref spawnRooms);
-        Destroy(m);
-        exits[playerController.exitNum].GetComponent<Collider2D>().isTrigger = false;
-        if (playerController.exitNum == 1)
+
+        if (floorNum > 0)
         {
-            player.transform.position -= Vector3.up * 50;
-            m = Instantiate(mazes[0], transform.position, transform.rotation);
-            StartCoroutine("Trigcool");
+            ArrayUtility.Clear(ref spawnRooms);
+            Destroy(m);
+            exits[0].GetComponent<Collider2D>().isTrigger = false;
+            exits[1].GetComponent<Collider2D>().isTrigger = false;
+            exits[2].GetComponent<Collider2D>().isTrigger = false;
+            exits[3].GetComponent<Collider2D>().isTrigger = false;
+            if (playerController.exitNum == 1)
+            {
+                player.transform.position -= Vector3.up * 100;
+                m = Instantiate(mazes[0], transform.position, transform.rotation);
+            }
+            if (playerController.exitNum == 0)
+            {
+                player.transform.position += Vector3.up * 100;
+                Instantiate(mazes[0], transform.position, transform.rotation);
+            }
+            if (playerController.exitNum == 3)
+            {
+                player.transform.position += Vector3.left * 100;
+                Instantiate(mazes[0], transform.position, transform.rotation);
+            }
+            if (playerController.exitNum == 2)
+            {
+                player.transform.position += Vector3.right * 100;
+                Instantiate(mazes[0], transform.position, transform.rotation);
+            }
+            playerController.maybe = false;
+            RoomSpawn();
         }
-        if (playerController.exitNum == 0)
-        {
-            player.transform.position += Vector3.up * 50;
-            Instantiate(mazes[0], transform.position, transform.rotation);
-            StartCoroutine("Trigcool");
-        }
-        if (playerController.exitNum == 3)
-        {
-            player.transform.position += Vector3.left * 50;
-            Instantiate(mazes[0], transform.position, transform.rotation);
-            StartCoroutine("Trigcool");
-        }
-        if (playerController.exitNum == 2)
-        {
-            player.transform.position += Vector3.right * 50;
-            Instantiate(mazes[0], transform.position, transform.rotation);
-            StartCoroutine("Trigcool");
-        }
-        playerController.maybe = false;
-        RoomSpawn();
     }
     public void RoomSpawn()
     {
+        spawned = false;
         if (spawnRooms.Length > 0)
         {
             if (spawnRooms[0].tag == roomTag[0])
@@ -122,11 +139,33 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    IEnumerator Trigcool()
+    public void Bob()
     {
-        yield return new WaitForSeconds(1);
-        exits[playerController.exitNum].GetComponent<Collider2D>().isTrigger = true;
+        playerNum = 0;
+        PlayerSpawn();
     }
+    public void Bill()
+    {
+        playerNum = 1;
+        PlayerSpawn();
+    }
+    public void Becca()
+    {
+        playerNum = 2;
+        PlayerSpawn();
+    }
+    public void PlayerSpawn()
+    {
+        Destroy(charSel);
+        Instantiate(players[playerNum], transform.position, transform.rotation);
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        MazeSpawn();
+        Camera.main.transform.SetParent(player.transform, true);
+        Camera.main.transform.position = player.transform.position + (Vector3.back * 10);
+        a = true;
+    }
+
 }
 
 
