@@ -271,6 +271,7 @@ MonoBehaviour:
   DEX: 0
   defense: 0
   magic_defense: 0
+  currentWeapon: {fileID: 8417539892744175362, guid: f8f91a69be0c3d64baf0d63bc8026ca4, type: 3}
   input: {fileID: 0}
   speed: 5
   inputY: 0
@@ -282,6 +283,9 @@ MonoBehaviour:
   tempdmg: 6
   rof: 1
   maybe: 0
+  atkCool: 0
+  angleDeg: 0
+  angleRad: 0
 --- !u!50 &7556014010532052095
 Rigidbody2D:
   serializedVersion: 5

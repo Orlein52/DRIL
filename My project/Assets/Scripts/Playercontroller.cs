@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public int DEX;
     public int defense;
     public int magic_defense;
+    public Weapon currentWeapon;
     Rigidbody2D rb;
     public PlayerInput input;
     Vector2 tempmove;
@@ -19,7 +20,6 @@ public class PlayerController : MonoBehaviour
     public float inputY;
     public float inputX;
     GameManager gameManager;
-    GameObject maze;
     public int exitNum;
     Vector3 mousePos;
     public GameObject weaponSlot;
@@ -27,12 +27,12 @@ public class PlayerController : MonoBehaviour
     public GameObject tempHit;
     public float health;
     public float tempdmg;
-    bool cool;
     bool atking;
     public float rof;
     public bool maybe = false;
-    GameObject a;
-    Vector3 displace;
+    public float atkCool;
+    public float angleDeg;
+    public float angleRad;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,16 +40,19 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
         cam = Camera.main;
-
+        if (gameManager.playerNum == 0)
+        {
+            currentWeapon.weaponSlot = weaponSlot.transform;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         mousePos = cam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        float angleRad = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x);
-        float angleDeg = (180 / Mathf.PI) * angleRad - 0;
-        weaponSlot.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
+        angleRad = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x);
+        angleDeg = (180 / Mathf.PI) * angleRad - 0;
+        weaponSlot.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg - 90);
         
         tempmove = rb.linearVelocity;
         tempmove.x = inputX * speed;
@@ -57,20 +60,10 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocityX = (tempmove.x);
         rb.linearVelocityY = (tempmove.y);
 
-        if (atking && !cool)
-        {
-            cool = true;
-            weaponSlot.transform.right = weaponSlot.transform.up;
-            weaponSlot.transform.position = (weaponSlot.transform.position - weaponSlot.transform.up);
-            a = Instantiate(tempHit, weaponSlot.transform.position, weaponSlot.transform.rotation, transform);
-            a.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
-            Destroy(a, 2f);
-            weaponSlot.transform.position = (weaponSlot.transform.position + weaponSlot.transform.up);
-            StartCoroutine("Atkcool");
-        }
+
         if (atking)
         {
-            a.transform.RotateAround(weaponSlot.transform.position, Vector3.forward, angleDeg);
+            currentWeapon.Attack();
         }
     }
 
@@ -82,7 +75,14 @@ public class PlayerController : MonoBehaviour
     }
     public void Attack(InputAction.CallbackContext context)
     {
-        atking = true;
+        if (context.ReadValueAsButton())
+        {
+            atking = true;
+        }
+        else
+        {
+            atking = false;
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -126,10 +126,5 @@ public class PlayerController : MonoBehaviour
         {
             health -= 3;
         }
-    }
-    IEnumerator Atkcool()
-    {
-        yield return new WaitForSeconds(rof);
-        cool = false;
     }
 }
