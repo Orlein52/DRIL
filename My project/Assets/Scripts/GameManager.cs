@@ -36,14 +36,25 @@ public class GameManager : MonoBehaviour
     GameObject m;
     public int playerNum;
     public int floorNum;
-    float roomCount;
     //a is finding out if you have picked a character
     bool a;
     GameObject charSel;
+    GameObject bobWepSel;
+    GameObject billWepSel;
+    GameObject beccaWepSel;
+    int wepNum;
+    public GameObject[] weapons;
+    int roomCount;
     void Start()
     {
         conNum = 0;
         charSel = GameObject.FindGameObjectWithTag("UI_Sel");
+        bobWepSel = GameObject.FindGameObjectWithTag("UI_bob_wep");
+        billWepSel = GameObject.FindGameObjectWithTag("UI_bill_wep");
+        beccaWepSel = GameObject.FindGameObjectWithTag("UI_becca_wep");
+        bobWepSel.SetActive(false);
+        billWepSel.SetActive(false);
+        beccaWepSel.SetActive(false);
     }
     void Update()
     {
@@ -142,21 +153,39 @@ public class GameManager : MonoBehaviour
     public void Bob()
     {
         playerNum = 0;
-        PlayerSpawn();
+        bobWepSel.SetActive(true);
+        Destroy(charSel);
     }
     public void Bill()
     {
         playerNum = 1;
-        PlayerSpawn();
+        billWepSel.SetActive(true);
+        Destroy(charSel);
     }
     public void Becca()
     {
         playerNum = 2;
-        PlayerSpawn();
+        beccaWepSel.SetActive(true);
+        Destroy(charSel);
+    }
+    public void WeaponSelect(int a)
+    {
+        if (playerNum == 0)
+        {
+            bobWepSel.SetActive(false);
+        }
+        if (playerNum == 1)
+        {
+            billWepSel.SetActive(false);
+        }
+        if (playerNum == 2)
+        {
+            beccaWepSel.SetActive(false);
+        }
+        wepNum = a;
     }
     public void PlayerSpawn()
     {
-        Destroy(charSel);
         Instantiate(players[playerNum], transform.position, transform.rotation);
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -165,7 +194,6 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.position = player.transform.position + (Vector3.back * 10);
         a = true;
     }
-
 }
 
 

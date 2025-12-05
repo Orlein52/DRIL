@@ -21,6 +21,11 @@ TagManager:
   - Attack
   - Room
   - UI_Sel
+  - UI_WeaponButton
+  - UI_WeaponSel
+  - UI_bob_wep
+  - UI_bill_wep
+  - UI_becca_wep
   layers:
   - Default
   - TransparentFX
