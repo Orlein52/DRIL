@@ -1,9 +1,8 @@
 using UnityEngine;
-using System.Collections;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class Skill : MonoBehaviour
+public class Bow : Weapon
 {
-    PlayerController plyrctrl;
     void Start()
     {
 
