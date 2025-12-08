@@ -170,6 +170,7 @@ public class GameManager : MonoBehaviour
     }
     public void WeaponSelect(int a)
     {
+        wepNum = a;
         if (playerNum == 0)
         {
             bobWepSel.SetActive(false);
@@ -182,16 +183,17 @@ public class GameManager : MonoBehaviour
         {
             beccaWepSel.SetActive(false);
         }
-        wepNum = a;
+        Debug.Log(wepNum);
     }
     public void PlayerSpawn()
     {
-        Instantiate(players[playerNum], transform.position, transform.rotation);
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject p = Instantiate(players[playerNum], transform.position, transform.rotation);
+        playerController = p.GetComponent<PlayerController>();
+        player = p.transform;
         MazeSpawn();
         Camera.main.transform.SetParent(player.transform, true);
         Camera.main.transform.position = player.transform.position + (Vector3.back * 10);
+        playerController.weapon = weapons[wepNum];
         a = true;
     }
 }

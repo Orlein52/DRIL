@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     public float atkCool;
     public float angleDeg;
     public float angleRad;
+    public GameObject weapon;
+    public bool c;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,10 +42,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
         cam = Camera.main;
-        if (gameManager.playerNum == 0)
-        {
-            currentWeapon.weaponSlot = weaponSlot.transform;
-        }
+        currentWeapon = weapon.GetComponent<Weapon>();
+        currentWeapon.weaponSlot = weaponSlot.transform;
+        Instantiate(weapon, weaponSlot.transform.position + weaponSlot.transform.up, weapon.transform.rotation, weaponSlot.transform);
     }
 
     // Update is called once per frame
@@ -53,17 +54,19 @@ public class PlayerController : MonoBehaviour
         angleRad = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x);
         angleDeg = (180 / Mathf.PI) * angleRad - 0;
         weaponSlot.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg - 90);
-        
         tempmove = rb.linearVelocity;
         tempmove.x = inputX * speed;
         tempmove.y = inputY * speed;
         rb.linearVelocityX = (tempmove.x);
         rb.linearVelocityY = (tempmove.y);
-
-
         if (atking)
         {
             currentWeapon.Attack();
+        }
+        if (c)
+        {
+            c = false;
+            StartCoroutine("Atkcool");
         }
     }
 
@@ -127,4 +130,10 @@ public class PlayerController : MonoBehaviour
             health -= 3;
         }
     }
+    IEnumerator Atkcool()
+    {
+        yield return new WaitForSeconds(currentWeapon.rof + currentWeapon.atkCool);
+        currentWeapon.cool = false;
+    }
 }
+

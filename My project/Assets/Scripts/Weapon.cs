@@ -4,11 +4,12 @@ using System.Collections;
 public class Weapon : MonoBehaviour
 {
     bool atking;
-    bool cool;
+    public bool cool;
     public bool ranged;
     public float rof;
     public float atkCool;
     public float projSpeed;
+    public float projLife;
     float angleDeg;
     float angleRad;
     public GameObject attack;
@@ -16,7 +17,7 @@ public class Weapon : MonoBehaviour
     public PlayerController plyer;
     void Start()
     {
-
+        plyer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
     void Update()
     {
@@ -24,27 +25,24 @@ public class Weapon : MonoBehaviour
     }
     public void Attack()
     {
+        plyer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         if (!cool && !ranged)
         {
             cool = true;
             GameObject a = Instantiate(attack, (weaponSlot.transform.position + weaponSlot.transform.up), weaponSlot.transform.rotation, weaponSlot.transform);
             a.transform.rotation = Quaternion.Euler(0f, 0f, plyer.angleDeg);
-            Destroy(a, rof);
-            StartCoroutine("Atkcool");
+            Destroy(a, projLife);
+            plyer.c = true;
         }
         if (!cool &&  ranged)
         {
+            cool = true;
             GameObject a = Instantiate(attack, (weaponSlot.transform.position + weaponSlot.transform.up), weaponSlot.transform.rotation);
             Rigidbody2D r = a.GetComponent<Rigidbody2D>();
             r.linearVelocity = (a.transform.up * projSpeed);
-            Destroy(a, rof);
-            StartCoroutine("Atkcool");
+            Destroy(a, projLife);
+            plyer.c = true;
         }
     }
-    IEnumerator Atkcool()
-    {
-        yield return new WaitForSeconds(rof + atkCool);
-        cool = false;
 
-    }
 }
