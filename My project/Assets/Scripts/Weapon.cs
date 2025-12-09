@@ -15,13 +15,46 @@ public class Weapon : MonoBehaviour
     public GameObject attack;
     public Transform weaponSlot;
     public PlayerController plyer;
+    public float dmg;
+    float dmgmod;
+    GameManager gameManager;
     void Start()
     {
         plyer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
+        LVLUP();
     }
     void Update()
     {
-        
+        if (gameManager.l && gameManager.LVLpoints == 0)
+        {
+            LVLUP();
+        }
+        if (atkCool < 0)
+        {
+            atkCool = 0;
+        }
+    }
+    public void LVLUP()
+    {
+        if (gameManager.playerNum == 0)
+        {
+            dmgmod = (1.9f * plyer.DEX);
+        }
+        if (gameManager.playerNum == 1)
+        {
+            dmgmod = (2.5f * plyer.STR);
+        }
+        if (gameManager.playerNum == 2)
+        {
+            dmgmod = (2.35f * plyer.intelligence);
+        }
+        plyer.tempdmg = dmgmod + dmg;
+        rof -= (plyer.DEX * 0.02f);
+        if (atkCool > 0)
+        {
+            atkCool -= (plyer.DEX * 0.02f);
+        }
     }
     public void Attack()
     {

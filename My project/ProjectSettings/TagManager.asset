@@ -26,6 +26,8 @@ TagManager:
   - UI_bob_wep
   - UI_bill_wep
   - UI_becca_wep
+  - UI_LVL
+  - UI_Stats
   layers:
   - Default
   - TransparentFX

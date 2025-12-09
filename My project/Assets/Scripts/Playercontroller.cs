@@ -6,7 +6,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public int intelligence;
+    public float intelligence;
     public int STR;
     public int CON;
     public int DEX;
@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     public float angleRad;
     public GameObject weapon;
     public bool c;
+    public float exp;
+    public float nextLvl;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -68,8 +70,13 @@ public class PlayerController : MonoBehaviour
             c = false;
             StartCoroutine("Atkcool");
         }
+        if (exp >= nextLvl)
+        {
+            exp = 0;
+            nextLvl = nextLvl * 1.5f;
+            gameManager.LVLUP();
+        }
     }
-
     public void Move(InputAction.CallbackContext context)
     {
         Vector2 InputAxis = context.ReadValue<Vector2>();

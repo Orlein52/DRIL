@@ -45,6 +45,9 @@ public class GameManager : MonoBehaviour
     int wepNum;
     public GameObject[] weapons;
     int roomCount;
+    GameObject LVL;
+    public int LVLpoints;
+    public bool l;
     void Start()
     {
         conNum = 0;
@@ -52,9 +55,11 @@ public class GameManager : MonoBehaviour
         bobWepSel = GameObject.FindGameObjectWithTag("UI_bob_wep");
         billWepSel = GameObject.FindGameObjectWithTag("UI_bill_wep");
         beccaWepSel = GameObject.FindGameObjectWithTag("UI_becca_wep");
+        LVL = GameObject.FindGameObjectWithTag("UI_LVL");
         bobWepSel.SetActive(false);
         billWepSel.SetActive(false);
         beccaWepSel.SetActive(false);
+        LVL.SetActive(false);
     }
     void Update()
     {
@@ -83,6 +88,10 @@ public class GameManager : MonoBehaviour
             {
                 RoomSpawn();
             }
+        }
+        if (!l && LVLpoints == 0)
+        {
+            LVLEnd();
         }
     }
     public void MazeSpawn()
@@ -195,6 +204,50 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.position = player.transform.position + (Vector3.back * 10);
         playerController.weapon = weapons[wepNum];
         a = true;
+    }
+    public void LVLUP()
+    {
+        Time.timeScale = 0;
+        LVL.SetActive(true);
+        LVLpoints = 4;
+        l = false;
+    }
+    public void CON()
+    {
+        playerController.CON++;
+        LVLpoints--;
+    }
+    public void STR()
+    {
+        if (playerNum == 1)
+        {
+            playerController.STR += 2;
+        }
+        else
+            playerController.STR++;
+        LVLpoints--;
+    }
+    public void DEX()
+    {
+        if (playerNum == 0)
+            playerController.DEX += 2;
+        else
+            playerController.DEX++;
+        LVLpoints--;
+    }
+    public void INT()
+    {
+        if (playerNum == 2)
+            playerController.intelligence += 2;
+        else
+            playerController.intelligence++;
+        LVLpoints--;
+    }
+    public void LVLEnd()
+    {
+        l = true;
+        LVL.SetActive(false);
+        Time.timeScale = 1;
     }
 }
 

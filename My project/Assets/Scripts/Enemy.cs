@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     public int detectDis;
     Rooms rooms;
     bool a;
+    public float exp;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -59,6 +60,7 @@ public class Enemy : MonoBehaviour
         }
         if (health <= 0)
         {
+            plyr.exp += exp;
             ArrayUtility.Remove(ref rooms.enemies, gameObject);
             Destroy(gameObject);
         }

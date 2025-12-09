@@ -265,10 +265,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf459b758f762864f8de4e4de1d1037f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intelligence: 0
-  STR: 0
-  CON: 0
-  DEX: 0
+  intelligence: 5
+  STR: 5
+  CON: 5
+  DEX: 10
   defense: 0
   magic_defense: 0
   currentWeapon: {fileID: 0}

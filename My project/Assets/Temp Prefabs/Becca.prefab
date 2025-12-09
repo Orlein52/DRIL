@@ -135,12 +135,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf459b758f762864f8de4e4de1d1037f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intelligence: 0
-  STR: 0
-  CON: 0
-  DEX: 0
+  intelligence: 10
+  STR: 5
+  CON: 5
+  DEX: 5
   defense: 0
   magic_defense: 0
+  currentWeapon: {fileID: 0}
   input: {fileID: 0}
   speed: 5
   inputY: 0
@@ -152,6 +153,13 @@ MonoBehaviour:
   tempdmg: 6
   rof: 1
   maybe: 0
+  atkCool: 0
+  angleDeg: 0
+  angleRad: 0
+  weapon: {fileID: 0}
+  c: 0
+  exp: 0
+  nextLvl: 15
 --- !u!114 &107375961482825620
 MonoBehaviour:
   m_ObjectHideFlags: 0
