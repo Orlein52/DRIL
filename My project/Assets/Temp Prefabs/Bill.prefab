@@ -127,6 +127,8 @@ MonoBehaviour:
   angleRad: 0
   weapon: {fileID: 0}
   c: 0
+  exp: 0
+  nextLvl: 15
 --- !u!114 &5497071125617698208
 MonoBehaviour:
   m_ObjectHideFlags: 0

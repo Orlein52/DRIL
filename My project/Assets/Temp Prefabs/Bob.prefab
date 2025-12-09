@@ -288,6 +288,8 @@ MonoBehaviour:
   angleRad: 0
   weapon: {fileID: 0}
   c: 0
+  exp: 0
+  nextLvl: 15
 --- !u!50 &7556014010532052095
 Rigidbody2D:
   serializedVersion: 5
