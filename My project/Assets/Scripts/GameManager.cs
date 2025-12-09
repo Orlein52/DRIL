@@ -96,10 +96,9 @@ public class GameManager : MonoBehaviour
     }
     public void MazeSpawn()
     {
-
+        ArrayUtility.Clear(ref spawnRooms);
         if (floorNum > 0)
         {
-            ArrayUtility.Clear(ref spawnRooms);
             Destroy(m);
             exits[0].GetComponent<Collider2D>().isTrigger = false;
             exits[1].GetComponent<Collider2D>().isTrigger = false;
@@ -137,24 +136,24 @@ public class GameManager : MonoBehaviour
             if (spawnRooms[0].tag == roomTag[0])
             {
                 roomNum = UnityEngine.Random.Range(0, bigRooms.Length - 1);
-                GameObject r = Instantiate(bigRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
+                Instantiate(bigRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
             if (spawnRooms[0].tag == roomTag[1])
             {
                 roomNum = UnityEngine.Random.Range(0, smallRooms.Length - 1);
-                GameObject r = Instantiate(smallRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
+                Instantiate(smallRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
             if (spawnRooms[0].tag == roomTag[2])
             {
                 roomNum = UnityEngine.Random.Range(0, medRooms.Length - 1);
-                GameObject r = Instantiate(medRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
+                Instantiate(medRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
             if (spawnRooms[0].tag == roomTag[3])
             {
-                GameObject r = Instantiate(bossRoom, spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
+                Instantiate(bossRoom, spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
         }
@@ -248,6 +247,7 @@ public class GameManager : MonoBehaviour
         l = true;
         LVL.SetActive(false);
         Time.timeScale = 1;
+        playerController.currentWeapon.LVLUP();
     }
 }
 

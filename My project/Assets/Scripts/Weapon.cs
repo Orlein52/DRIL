@@ -20,23 +20,14 @@ public class Weapon : MonoBehaviour
     GameManager gameManager;
     void Start()
     {
-        plyer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
-        LVLUP();
+
     }
     void Update()
     {
-        if (gameManager.l && gameManager.LVLpoints == 0)
-        {
-            LVLUP();
-        }
-        if (atkCool < 0)
-        {
-            atkCool = 0;
-        }
     }
     public void LVLUP()
     {
+        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
         if (gameManager.playerNum == 0)
         {
             dmgmod = (1.9f * plyer.DEX);
@@ -54,6 +45,10 @@ public class Weapon : MonoBehaviour
         if (atkCool > 0)
         {
             atkCool -= (plyer.DEX * 0.02f);
+        }
+        if (atkCool < 0)
+        {
+            atkCool = 0;
         }
     }
     public void Attack()

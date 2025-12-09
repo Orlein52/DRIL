@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
         currentWeapon = weapon.GetComponent<Weapon>();
         currentWeapon.weaponSlot = weaponSlot.transform;
         Instantiate(weapon, weaponSlot.transform.position + weaponSlot.transform.up, weapon.transform.rotation, weaponSlot.transform);
+        currentWeapon.LVLUP();
     }
 
     // Update is called once per frame

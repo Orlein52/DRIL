@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Attack")
+        if (other.tag == "Attack" && rooms.d)
         {
             health -= plyr.tempdmg;
         }
