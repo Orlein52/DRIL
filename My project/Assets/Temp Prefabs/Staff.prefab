@@ -109,3 +109,4 @@ MonoBehaviour:
   attack: {fileID: 5175560694994343143, guid: 80e7f3a747096cc4c91a1cb0e79bd787, type: 3}
   weaponSlot: {fileID: 0}
   plyer: {fileID: 0}
+  dmg: 50
