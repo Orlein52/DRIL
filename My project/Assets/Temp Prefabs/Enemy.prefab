@@ -110,6 +110,8 @@ MonoBehaviour:
   firepow: 5
   detectDis: 10
   exp: 5
+  dmg: 10
+  projDMG: 20
 --- !u!61 &3819923152636831457
 BoxCollider2D:
   m_ObjectHideFlags: 0

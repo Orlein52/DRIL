@@ -215,6 +215,9 @@ public class GameManager : MonoBehaviour
     {
         playerController.CON++;
         LVLpoints--;
+        playerController.maxHealth += 25;
+        playerController.health += 25;
+        playerController.speed += 0.2f;
     }
     public void STR()
     {
@@ -225,6 +228,7 @@ public class GameManager : MonoBehaviour
         else
             playerController.STR++;
         LVLpoints--;
+        playerController.defense = (2 * playerController.STR) + 10;
     }
     public void DEX()
     {
@@ -248,6 +252,7 @@ public class GameManager : MonoBehaviour
         LVL.SetActive(false);
         Time.timeScale = 1;
         playerController.currentWeapon.LVLUP();
+
     }
 }
 

@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     Rooms rooms;
     bool a;
     public float exp;
+    public float dmg;
+    public float projDMG;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

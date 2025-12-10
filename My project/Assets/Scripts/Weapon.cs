@@ -41,7 +41,10 @@ public class Weapon : MonoBehaviour
             dmgmod = (2.35f * plyer.intelligence);
         }
         plyer.tempdmg = dmgmod + dmg;
-        rof -= (plyer.DEX * 0.02f);
+        if (gameManager.playerNum == 0)
+            rof -= (plyer.DEX * 0.001f);
+        else
+            rof -= (plyer.DEX * 0.005f);
         if (atkCool > 0)
         {
             atkCool -= (plyer.DEX * 0.02f);

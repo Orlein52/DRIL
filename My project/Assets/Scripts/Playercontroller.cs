@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     public PlayerInput input;
     Vector2 tempmove;
-    public int speed;
+    public float speed;
     public float inputY;
     public float inputX;
     GameManager gameManager;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     Camera cam;
     public GameObject tempHit;
     public float health;
+    public float maxHealth;
     public float tempdmg;
     bool atking;
     public float rof;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
         currentWeapon.weaponSlot = weaponSlot.transform;
         Instantiate(weapon, weaponSlot.transform.position + weaponSlot.transform.up, weapon.transform.rotation, weaponSlot.transform);
         currentWeapon.LVLUP();
+        defense = (2 * STR) + 10;
     }
 
     // Update is called once per frame
@@ -99,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Enem_Proj")
         {
-            health -= 3;
+            health -= 20 - (((2 * intelligence) + 10) / ((2 * intelligence + 10) + 35));
         }
         if(other.tag == "Exit_N" && !maybe)
         {
@@ -136,6 +138,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             health -= 3;
+            Enemy e = other.gameObject.GetComponent<Enemy>();
+            health -= e.dmg - (defense / (defense + 35));
         }
     }
     IEnumerator Atkcool()
