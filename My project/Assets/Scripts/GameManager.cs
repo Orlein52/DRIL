@@ -252,7 +252,6 @@ public class GameManager : MonoBehaviour
         LVL.SetActive(false);
         Time.timeScale = 1;
         playerController.currentWeapon.LVLUP();
-
     }
 }
 

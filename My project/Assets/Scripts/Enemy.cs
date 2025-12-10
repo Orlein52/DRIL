@@ -11,12 +11,11 @@ public class Enemy : MonoBehaviour
     public GameObject proj;
     public float speed;
     public float health;
-    Vector3 fire;
-    Vector3 perchance;
     Ray maybe;
     bool fired;
     public float rof;
     Rigidbody2D rb;
+    Ray2D ray;
     Vector2 direction;
     public float firepow;
     public int detectDis;
@@ -25,6 +24,8 @@ public class Enemy : MonoBehaviour
     public float exp;
     public float dmg;
     public float projDMG;
+    Vector2 go;
+    Vector3 perchance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,13 +41,16 @@ public class Enemy : MonoBehaviour
         float angleDeg = (180 / Mathf.PI) * angleRad - 0;
         transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
         direction = (player.transform.position - transform.position);
+        ray = new Ray2D(transform.position, direction);
+        go = ray.GetPoint(1);
         if (a)
         {
             if (rooms.d)
             {
                 if (!ranged)
                 {
-                    rb.linearVelocity = (direction * speed);
+                    rb.linearVelocity = (ray.direction * speed);
+                    rb.mass = 2;
                 }
                 if (ranged && !fired)
                 {

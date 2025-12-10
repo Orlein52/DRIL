@@ -105,7 +105,7 @@ MonoBehaviour:
   rof: 0.1
   atkCool: 0.1
   projSpeed: 0
-  projLife: 0
+  projLife: 0.05
   attack: {fileID: 1722656276147000784, guid: 7eb57077b168a6347aac300b4a1706fe, type: 3}
   weaponSlot: {fileID: 0}
   plyer: {fileID: 0}
