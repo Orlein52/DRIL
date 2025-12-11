@@ -132,6 +132,13 @@ public class PlayerController : MonoBehaviour
             Rooms r = other.gameObject.GetComponent<Rooms>();
             r.RoomStart();
         }
+        if (other.tag == "enemy")
+        {
+            GameObject b = GameObject.FindGameObjectWithTag("boss");
+            cam.transform.SetParent(b.transform);
+            cam.transform.position = b.transform.position + (Vector3.back * 10);
+            cam.orthographicSize = 10;
+        }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {

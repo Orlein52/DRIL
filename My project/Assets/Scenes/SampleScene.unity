@@ -1774,7 +1774,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0
   far clip plane: 1000
   field of view: 34
   orthographic: 1
@@ -1803,7 +1803,7 @@ Transform:
   m_GameObject: {fileID: 442941088}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.82, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4179,7 +4179,7 @@ MonoBehaviour:
   mazes:
   - {fileID: 2415783448420717168, guid: f70507be461889942b108c13909ad2ad, type: 3}
   badRoom: {fileID: 5685357201041614601, guid: 50938172464c79c4db6c6f974d0800a6, type: 3}
-  bossRoom: {fileID: 7516282777953954970, guid: 70fd31a0d5c8c96479b37182cbef619c, type: 3}
+  bossRoom: {fileID: 6696023567660212215, guid: 007ad7e65fbf7eb45a2e423e729f4869, type: 3}
   startRoom: {fileID: 0}
   exits:
   - {fileID: 1801818328}
@@ -4191,9 +4191,10 @@ MonoBehaviour:
   - {fileID: 7887844391699217315, guid: b22a072027c20e64680241ba66633ab0, type: 3}
   - {fileID: 8959580497724397301, guid: 474c60955883e5747ae0536bbc879f90, type: 3}
   - {fileID: 4863575870484552345, guid: 5b3d048ee0d066e40b4b7880389efa36, type: 3}
+  bossTile: {fileID: 7575996339693780779, guid: b6596d2775cdbaf42b659e7f429d8e87, type: 3}
   connector: {fileID: 0}
   conNum: 0
-  floorsize: 100
+  floorsize: 1
   bossChance: 0
   chanceBoss: 0
   roomTag:
@@ -4215,6 +4216,7 @@ MonoBehaviour:
   - {fileID: 6573206297006346531, guid: 563aedb1c07977647b928c9f7d52a523, type: 3}
   LVLpoints: 0
   l: 0
+  tileNum: 0
 --- !u!4 &1243917070
 Transform:
   m_ObjectHideFlags: 0

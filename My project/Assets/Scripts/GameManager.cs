@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     PlayerController playerController;
     public GameObject[] spawnRooms;
     public GameObject[] players;
+    public GameObject bossTile;
     Transform player;
     float roomNum;
     public GameObject connector;
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     GameObject LVL;
     public int LVLpoints;
     public bool l;
+    public int tileNum;
     void Start()
     {
         conNum = 0;
@@ -99,33 +101,67 @@ public class GameManager : MonoBehaviour
         ArrayUtility.Clear(ref spawnRooms);
         if (floorNum > 0)
         {
-            Destroy(m);
-            exits[0].GetComponent<Collider2D>().isTrigger = false;
-            exits[1].GetComponent<Collider2D>().isTrigger = false;
-            exits[2].GetComponent<Collider2D>().isTrigger = false;
-            exits[3].GetComponent<Collider2D>().isTrigger = false;
-            if (playerController.exitNum == 1)
+            if (tileNum < floorsize)
             {
-                player.transform.position -= Vector3.up * 100;
-                m = Instantiate(mazes[0], transform.position, transform.rotation);
+                Destroy(m);
+                exits[0].GetComponent<Collider2D>().isTrigger = false;
+                exits[1].GetComponent<Collider2D>().isTrigger = false;
+                exits[2].GetComponent<Collider2D>().isTrigger = false;
+                exits[3].GetComponent<Collider2D>().isTrigger = false;
+                if (playerController.exitNum == 1)
+                {
+                    player.transform.position -= Vector3.up * 100;
+                    m = Instantiate(mazes[0], transform.position, transform.rotation);
+                }
+                if (playerController.exitNum == 0)
+                {
+                    player.transform.position += Vector3.up * 100;
+                    m = Instantiate(mazes[0], transform.position, transform.rotation);
+                }
+                if (playerController.exitNum == 3)
+                {
+                    player.transform.position += Vector3.left * 100;
+                    m = Instantiate(mazes[0], transform.position, transform.rotation);
+                }
+                if (playerController.exitNum == 2)
+                {
+                    player.transform.position += Vector3.right * 100;
+                    m = Instantiate(mazes[0], transform.position, transform.rotation);
+                }
+                playerController.maybe = false;
+                RoomSpawn();
+                tileNum++;
             }
-            if (playerController.exitNum == 0)
+            if (tileNum >= floorsize)
             {
-                player.transform.position += Vector3.up * 100;
-                Instantiate(mazes[0], transform.position, transform.rotation);
+                Destroy(m);
+                exits[0].GetComponent<Collider2D>().isTrigger = false;
+                exits[1].GetComponent<Collider2D>().isTrigger = false;
+                exits[2].GetComponent<Collider2D>().isTrigger = false;
+                exits[3].GetComponent<Collider2D>().isTrigger = false;
+                if (playerController.exitNum == 1)
+                {
+                    player.transform.position += Vector3.up * 100;
+                    m = Instantiate(bossRoom, transform.position, transform.rotation);
+                }
+                if (playerController.exitNum == 0)
+                {
+                    player.transform.position -= Vector3.up * 100;
+                    m = Instantiate(bossRoom, transform.position, transform.rotation);
+                }
+                if (playerController.exitNum == 3)
+                {
+                    player.transform.position -= Vector3.left * 100;
+                    m = Instantiate(bossRoom, transform.position, transform.rotation);
+                }
+                if (playerController.exitNum == 2)
+                {
+                    player.transform.position -= Vector3.right * 100;
+                    m = Instantiate(bossRoom, transform.position, transform.rotation);
+                }
+                playerController.maybe = false;
+                RoomSpawn();
             }
-            if (playerController.exitNum == 3)
-            {
-                player.transform.position += Vector3.left * 100;
-                Instantiate(mazes[0], transform.position, transform.rotation);
-            }
-            if (playerController.exitNum == 2)
-            {
-                player.transform.position += Vector3.right * 100;
-                Instantiate(mazes[0], transform.position, transform.rotation);
-            }
-            playerController.maybe = false;
-            RoomSpawn();
         }
     }
     public void RoomSpawn()
@@ -153,7 +189,7 @@ public class GameManager : MonoBehaviour
             }
             if (spawnRooms[0].tag == roomTag[3])
             {
-                Instantiate(bossRoom, spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
+                Instantiate(bossTile, spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
                 ArrayUtility.RemoveAt(ref spawnRooms, 0);
             }
         }
