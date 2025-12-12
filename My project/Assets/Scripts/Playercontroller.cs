@@ -45,9 +45,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<PlayerInput>();
         cam = Camera.main;
+        weapon = Instantiate(weapon, weaponSlot.transform.position + weaponSlot.transform.up, weapon.transform.rotation, weaponSlot.transform);
         currentWeapon = weapon.GetComponent<Weapon>();
         currentWeapon.weaponSlot = weaponSlot.transform;
-        Instantiate(weapon, weaponSlot.transform.position + weaponSlot.transform.up, weapon.transform.rotation, weaponSlot.transform);
         currentWeapon.LVLUP();
         defense = (2 * STR) + 10;
     }

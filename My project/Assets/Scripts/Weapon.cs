@@ -18,6 +18,10 @@ public class Weapon : MonoBehaviour
     public float dmg;
     float dmgmod;
     GameManager gameManager;
+    public bool flask;
+    public bool voodoo;
+    public bool melee = true;
+    float dexScale;
     void Start()
     {
 
@@ -42,16 +46,15 @@ public class Weapon : MonoBehaviour
         }
         plyer.tempdmg = dmgmod + dmg;
         if (gameManager.playerNum == 0)
-            rof -= (plyer.DEX * 0.001f);
+        {
+            dexScale = (1 /(-0.01f * (plyer.DEX + 95))) + 1;
+        }
         else
-            rof -= ((plyer.DEX * 0.005f) - 0.015f);
+            dexScale = (1 / (-0.05f * (plyer.DEX + 15))) + 1;
+        rof = rof * (1 - dexScale);
         if (atkCool > 0)
         {
-            atkCool -= (plyer.DEX * 0.02f);
-        }
-        if (atkCool < 0)
-        {
-            atkCool = 0;
+            atkCool = (1 / (plyer.DEX * 0.2f));
         }
     }
     public void Attack()
@@ -73,6 +76,17 @@ public class Weapon : MonoBehaviour
             r.linearVelocity = (a.transform.up * projSpeed);
             Destroy(a, projLife);
             plyer.c = true;
+        }
+        if (!cool && voodoo)
+        {
+            cool = true;
+            GameObject a = Instantiate(attack, (weaponSlot.transform.position + weaponSlot.transform.up), weaponSlot.transform.rotation);
+            Rigidbody2D r = a.GetComponent<Rigidbody2D>();
+
+        }
+        if (!cool && flask)
+        {
+
         }
     }
 

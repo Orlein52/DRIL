@@ -103,7 +103,7 @@ MonoBehaviour:
   cool: 0
   ranged: 1
   rof: 1
-  atkCool: 0
+  atkCool: 0.25
   projSpeed: 10
   projLife: 10
   attack: {fileID: 5175560694994343143, guid: 80e7f3a747096cc4c91a1cb0e79bd787, type: 3}
