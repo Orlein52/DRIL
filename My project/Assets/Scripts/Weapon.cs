@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour
         if (gameManager.playerNum == 0)
             rof -= (plyer.DEX * 0.001f);
         else
-            rof -= (plyer.DEX * 0.005f);
+            rof -= ((plyer.DEX * 0.005f) - 0.015f);
         if (atkCool > 0)
         {
             atkCool -= (plyer.DEX * 0.02f);
