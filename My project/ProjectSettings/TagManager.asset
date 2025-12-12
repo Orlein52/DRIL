@@ -28,6 +28,7 @@ TagManager:
   - UI_becca_wep
   - UI_LVL
   - UI_Stats
+  - Flask_Proj
   layers:
   - Default
   - TransparentFX
