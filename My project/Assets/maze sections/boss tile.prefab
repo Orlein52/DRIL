@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7219084284485106842, guid: 612a42169a35485478ee307928c93f17, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.5
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7219084284485106842, guid: 612a42169a35485478ee307928c93f17, type: 3}
       propertyPath: m_LocalPosition.y
@@ -236,7 +236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 913668666106621318, guid: 5c1ef0fa28194a3469e0c10c4674e7cd, type: 3}
       propertyPath: m_Name
-      value: mazetile (1) Variant
+      value: boss tile
       objectReference: {fileID: 0}
     - target: {fileID: 913668666106621318, guid: 5c1ef0fa28194a3469e0c10c4674e7cd, type: 3}
       propertyPath: m_IsActive
