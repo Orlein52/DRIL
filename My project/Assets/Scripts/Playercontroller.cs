@@ -138,6 +138,8 @@ public class PlayerController : MonoBehaviour
             cam.transform.SetParent(b.transform);
             cam.transform.position = b.transform.position + (Vector3.back * 10);
             cam.orthographicSize = 10;
+            Boss boss = b.GetComponent<Boss>();
+            boss.a = true;
         }
     }
     private void OnCollisionEnter2D(Collision2D other)
