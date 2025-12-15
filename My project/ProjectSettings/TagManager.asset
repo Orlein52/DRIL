@@ -30,6 +30,9 @@ TagManager:
   - UI_Stats
   - Flask_Proj
   - Flask
+  - Health
+  - UI_Health
+  - UI_Death
   layers:
   - Default
   - TransparentFX

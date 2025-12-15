@@ -113,6 +113,7 @@ public class Weapon : MonoBehaviour
     public void FlaskBreak()
     {
         GameObject fl = Instantiate(flaskProj, a.transform.position, a.transform.rotation);
+        Destroy(a);
         Destroy(fl, projLife);
     }
 }

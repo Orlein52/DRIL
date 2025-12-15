@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
-using System.Collections;
+using UnityEngine.InputSystem;
 
 public class Boss : MonoBehaviour
 {
@@ -17,6 +18,15 @@ public class Boss : MonoBehaviour
     public GameObject idk;
     public Transform atkTran;
     public float dmgRed;
+    bool l;
+    bool cool;
+    public float atkcool;
+    public float projLife;
+    public bool start = false;
+    public float atkcoolD;
+    bool t;
+    public int tNum;
+    public int rotNum;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +41,36 @@ public class Boss : MonoBehaviour
     {
         if (rooms.d && a)
         {
+            if (start)
+            {
+                StartCoroutine("CoolD");
+                start = false;
+            }
+            if (l && !cool)
+            {
+                float angleRad = Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x);
+                float angleDeg = (180 / Mathf.PI) * angleRad - 0;
+                atkTran.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg - 90);
+                GameObject at = Instantiate(proj, atkTran.position, atkTran.rotation);
+                Rigidbody2D r = at.GetComponent<Rigidbody2D>();
+                r.linearVelocity = (at.transform.up * 20);
+                Destroy(at, projLife);
+                StartCoroutine("AtkCool");
+            }
+            if (t && !cool)
+            {
+                GameObject at = Instantiate(proj, atkTran.position, atkTran.rotation);
+                Rigidbody2D r = at.GetComponent<Rigidbody2D>();
+                r.linearVelocity = (at.transform.up * 20);
+                Destroy(at, projLife);
+                atkTran.transform.rotation = Quaternion.Euler(0f, 0f, (atkTran.transform.rotation.z * rotNum));
+                tNum++;
+                rotNum += 45;
+            }
+            if (t &&  tNum > 4)
+            {
+                StartCoroutine("AtkCool");
+            }
             if (health <= 0)
             {
                 plyr.exp += exp;
@@ -42,9 +82,19 @@ public class Boss : MonoBehaviour
             }
         }
     }
-    public void Spin()
+    public void Laser()
     {
-
+        l = true;
+        projLife = 20;
+        cool = false;
+        StartCoroutine("CoolD");
+    }
+    public void Tack()
+    {
+        t = true;
+        projLife = 20;
+        cool = false;
+        StartCoroutine("CoolD");
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -52,5 +102,24 @@ public class Boss : MonoBehaviour
         {
             health -= (plyr.tempdmg * (1 - dmgRed));
         }
+    }
+    IEnumerator AtkCool()
+    {
+        cool = true;
+        yield return new WaitForSeconds(atkcool);
+        cool = false;
+    }
+    IEnumerator CoolD()
+    {
+        yield return new WaitForSeconds(atkcoolD);
+        l = false;
+        t = false;
+        yield return new WaitForSeconds(atkcoolD);
+        int s = Random.Range(0, 2);
+        if (s == 0)
+            Laser();
+        if (s == 1)
+            Tack();
+
     }
 }

@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     GameObject bobWepSel;
     GameObject billWepSel;
     GameObject beccaWepSel;
+    GameObject health;
     int wepNum;
     public GameObject[] weapons;
     int roomCount;
@@ -50,6 +52,8 @@ public class GameManager : MonoBehaviour
     public int LVLpoints;
     public bool l;
     public int tileNum;
+    Image healthbar;
+    GameObject death;
     void Start()
     {
         conNum = 0;
@@ -58,15 +62,21 @@ public class GameManager : MonoBehaviour
         billWepSel = GameObject.FindGameObjectWithTag("UI_bill_wep");
         beccaWepSel = GameObject.FindGameObjectWithTag("UI_becca_wep");
         LVL = GameObject.FindGameObjectWithTag("UI_LVL");
+        healthbar = GameObject.FindGameObjectWithTag("Health").GetComponent<Image>();
+        health = GameObject.FindGameObjectWithTag("UI_Health");
+        death = GameObject.FindGameObjectWithTag("UI_Death");
         bobWepSel.SetActive(false);
         billWepSel.SetActive(false);
         beccaWepSel.SetActive(false);
         LVL.SetActive(false);
+        health.SetActive(false);
+        death.SetActive(false);
     }
     void Update()
     {
         if (a)
         {
+            healthbar.fillAmount = (playerController.health / playerController.maxHealth);
             if (floorNum == 0)
             {
                 m = Instantiate(mazes[0], roomPos, transform.rotation);
@@ -231,6 +241,7 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerSpawn()
     {
+        health.SetActive(true);
         GameObject p = Instantiate(players[playerNum], transform.position, transform.rotation);
         playerController = p.GetComponent<PlayerController>();
         player = p.transform;
@@ -288,6 +299,21 @@ public class GameManager : MonoBehaviour
         LVL.SetActive(false);
         Time.timeScale = 1;
         playerController.currentWeapon.LVLUP();
+    }
+    public void Death()
+    {
+        health.SetActive(false);
+        Destroy(m);
+        Destroy(player);
+        death.SetActive(true);
+    }
+    public void Resp()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
 

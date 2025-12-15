@@ -110,3 +110,7 @@ MonoBehaviour:
   weaponSlot: {fileID: 0}
   plyer: {fileID: 0}
   dmg: 25
+  flask: 0
+  voodoo: 0
+  melee: 0
+  flaskProj: {fileID: 0}

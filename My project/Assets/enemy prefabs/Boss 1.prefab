@@ -180,15 +180,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84304d5e8489ee4cbbc466a35b0d014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
+  health: 2000
   exp: 100
   dmg: 0
   projDMG: 0
-  proj: {fileID: 0}
+  a: 0
+  proj: {fileID: 1840503616893457093, guid: 2093079179d97ae44881402e1c4433b0, type: 3}
   minion: {fileID: 0}
   idk: {fileID: 0}
   atkTran: {fileID: 5895073094024951930}
-  dmgRed: 0.3
+  dmgRed: 0.5
+  atkcool: 0
+  projLife: 0
+  start: 0
+  atkcoolD: 1
+  tNum: 0
+  rotNum: 0
 --- !u!58 &4805129190921059708
 CircleCollider2D:
   m_ObjectHideFlags: 0
