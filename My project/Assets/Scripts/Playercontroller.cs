@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public bool c;
     public float exp;
     public float nextLvl;
+    public bool f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -78,6 +79,11 @@ public class PlayerController : MonoBehaviour
             exp = 0;
             nextLvl = nextLvl * 1.5f;
             gameManager.LVLUP();
+        }
+        if (f)
+        {
+            f = false;
+            currentWeapon.FlaskBreak();
         }
     }
     public void Move(InputAction.CallbackContext context)

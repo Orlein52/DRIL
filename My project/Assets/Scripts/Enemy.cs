@@ -83,6 +83,17 @@ public class Enemy : MonoBehaviour
             ArrayUtility.Add(ref rooms.enemies, gameObject);
             a = true;
         }
+        if (other.tag == "Flask")
+        {
+            plyr.f = true;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "Flask_Proj")
+        {
+            health -= plyr.tempdmg;
+        }
     }
     IEnumerator fireCooldown()
     {
