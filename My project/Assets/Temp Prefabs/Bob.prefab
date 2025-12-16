@@ -279,8 +279,8 @@ MonoBehaviour:
   exitNum: 0
   weaponSlot: {fileID: 6970512068742674510}
   tempHit: {fileID: 1722656276147000784, guid: 7eb57077b168a6347aac300b4a1706fe, type: 3}
-  health: 30
-  maxHealth: 30
+  health: 50
+  maxHealth: 50
   tempdmg: 6
   rof: 1
   maybe: 0
@@ -304,7 +304,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0

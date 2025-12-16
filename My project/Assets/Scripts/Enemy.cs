@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     public float projDMG;
     Vector2 go;
     Vector3 perchance;
+    public GameObject healthCol;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -67,6 +68,9 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             plyr.exp += exp;
+            float s = Random.Range(0, 20);
+            if (s == 0)
+                Instantiate(healthCol, transform.position, transform.rotation);
             ArrayUtility.Remove(ref rooms.enemies, gameObject);
             Destroy(gameObject);
         }
@@ -86,6 +90,20 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Flask")
         {
             plyr.f = true;
+        }
+        if (other.tag == "Minion" && rooms.d)
+        {
+            Minion m = other.gameObject.GetComponent<Minion>();
+            m.enemy = gameObject;
+            m.col.enabled = false;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Minion")
+        {
+            Minion m = other.gameObject.GetComponent<Minion>();
+            health -= m.minDmg;
         }
     }
     private void OnTriggerStay2D(Collider2D other)

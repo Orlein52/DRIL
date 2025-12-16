@@ -149,7 +149,8 @@ MonoBehaviour:
   exitNum: 0
   weaponSlot: {fileID: 2499409324778938727}
   tempHit: {fileID: 1722656276147000784, guid: 7eb57077b168a6347aac300b4a1706fe, type: 3}
-  health: 0
+  health: 50
+  maxHealth: 50
   tempdmg: 6
   rof: 1
   maybe: 0
@@ -158,8 +159,9 @@ MonoBehaviour:
   angleRad: 0
   weapon: {fileID: 0}
   c: 0
-  exp: 0
-  nextLvl: 15
+  exp: 1
+  nextLvl: 1
+  f: 0
 --- !u!114 &107375961482825620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,7 +304,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0

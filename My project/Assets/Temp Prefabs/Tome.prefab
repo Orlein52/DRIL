@@ -102,10 +102,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cool: 0
   ranged: 0
-  rof: 0
+  rof: 20
   atkCool: 0
   projSpeed: 0
   projLife: 0
-  attack: {fileID: 0}
+  attack: {fileID: 2180593862242350447, guid: c7e5a1cdaeee4734abfc4e9aa0567884, type: 3}
   weaponSlot: {fileID: 0}
   plyer: {fileID: 0}
+  dmg: 0
+  flask: 0
+  tome: 1
+  melee: 0
+  flaskProj: {fileID: 0}
+  minNum: 0
+  maxMin: 5
+  minSpeed: 5

@@ -20,13 +20,16 @@ public class Weapon : MonoBehaviour
     float dmgmod;
     GameManager gameManager;
     public bool flask;
-    public bool voodoo;
+    public bool tome;
     public bool melee = true;
     float dexScale;
     bool f;
     GameObject a;
     public GameObject flaskProj;
     float flaskSpeed;
+    public float minNum;
+    public float maxMin;
+    public float minSpeed;
     void Start()
     {
         flaskSpeed = projSpeed;
@@ -73,6 +76,7 @@ public class Weapon : MonoBehaviour
         {
             atkCool = (1 / (plyer.DEX * 0.2f));
         }
+        maxMin = (plyer.intelligence/2);
     }
     public void Attack()
     {
@@ -94,12 +98,22 @@ public class Weapon : MonoBehaviour
             Destroy(a, projLife);
             plyer.c = true;
         }
-        if (!cool && voodoo)
+        if (!cool && tome)
         {
             cool = true;
-            GameObject a = Instantiate(attack, (weaponSlot.transform.position + weaponSlot.transform.up), weaponSlot.transform.rotation);
-            Rigidbody2D r = a.GetComponent<Rigidbody2D>();
-
+            if (minNum < maxMin)
+            {
+                Instantiate(attack, (weaponSlot.transform.position + weaponSlot.transform.up), weaponSlot.transform.rotation);
+                minNum++;
+                plyer.c = true;
+            }
+            if (minNum >= maxMin)
+            {
+                plyer.health -= (plyer.CON - ((2 * plyer.intelligence) + 10) / ((2 * plyer.intelligence + 10) + 35));
+                minSpeed = minSpeed * 10;
+                StartCoroutine("Mincool");
+                plyer.c = true;
+            }
         }
         if (!cool && flask)
         {
@@ -115,5 +129,10 @@ public class Weapon : MonoBehaviour
         GameObject fl = Instantiate(flaskProj, a.transform.position, a.transform.rotation);
         Destroy(a);
         Destroy(fl, projLife);
+    }
+    IEnumerator Mincool()
+    {
+        yield return new WaitForSeconds(rof);
+        minSpeed = minSpeed / 10;
     }
 }

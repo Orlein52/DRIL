@@ -61,7 +61,7 @@ public class Boss : MonoBehaviour
             {
                 GameObject at = Instantiate(proj, atkTran.position, atkTran.rotation);
                 Rigidbody2D r = at.GetComponent<Rigidbody2D>();
-                r.linearVelocity = (at.transform.up * 20);
+                r.linearVelocity = (at.transform.up * 5);
                 Destroy(at, projLife);
                 atkTran.transform.rotation = Quaternion.Euler(0f, 0f, (atkTran.transform.rotation.z * rotNum));
                 tNum++;
@@ -102,6 +102,20 @@ public class Boss : MonoBehaviour
         {
             health -= (plyr.tempdmg * (1 - dmgRed));
         }
+        if (other.tag == "Minion" && rooms.d)
+        {
+            Minion m = other.gameObject.GetComponent<Minion>();
+            m.enemy = gameObject;
+            m.col.enabled = false;
+        }
+    }
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Minion")
+        {
+            Minion m = other.gameObject.GetComponent<Minion>();
+            health -= m.minDmg;
+        }
     }
     IEnumerator AtkCool()
     {
@@ -116,6 +130,7 @@ public class Boss : MonoBehaviour
         t = false;
         yield return new WaitForSeconds(atkcoolD);
         int s = Random.Range(0, 2);
+        atkcoolD -= 0.01f;
         if (s == 0)
             Laser();
         if (s == 1)

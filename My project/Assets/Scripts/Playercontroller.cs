@@ -91,6 +91,10 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.Death();
         }
+        if (health > maxHealth)
+        { 
+            health = maxHealth; 
+        }
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -160,6 +164,11 @@ public class PlayerController : MonoBehaviour
             boss.a = true;
             boss.start = true;
             bs = true;
+        }
+        if (other.tag == "Health_Col")
+        {
+            Destroy(other.gameObject);
+            health += (0.2f * maxHealth);
         }
     }
     private void OnCollisionEnter2D(Collision2D other)

@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public int tileNum;
     Image healthbar;
     GameObject death;
+    public int doneRooms;
     void Start()
     {
         conNum = 0;
@@ -99,6 +100,13 @@ public class GameManager : MonoBehaviour
             if (!spawned && spawnRooms.Length > 0)
             {
                 RoomSpawn();
+            }
+            if (doneRooms >= 4)
+            {
+                exits[0].GetComponent<Collider2D>().isTrigger = true;
+                exits[1].GetComponent<Collider2D>().isTrigger = true;
+                exits[2].GetComponent<Collider2D>().isTrigger = true;
+                exits[3].GetComponent<Collider2D>().isTrigger = true;
             }
         }
         if (!l && LVLpoints == 0)
@@ -304,11 +312,12 @@ public class GameManager : MonoBehaviour
     {
         health.SetActive(false);
         Destroy(m);
-        Destroy(player);
+        Time.timeScale = 0;
         death.SetActive(true);
     }
     public void Resp()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void Quit()

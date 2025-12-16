@@ -33,6 +33,8 @@ TagManager:
   - Health
   - UI_Health
   - UI_Death
+  - Health_Col
+  - Minion
   layers:
   - Default
   - TransparentFX
