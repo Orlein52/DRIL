@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     GameObject billWepSel;
     GameObject beccaWepSel;
     GameObject health;
-    int wepNum;
+    public int wepNum;
     public GameObject[] weapons;
     int roomCount;
     GameObject LVL;
