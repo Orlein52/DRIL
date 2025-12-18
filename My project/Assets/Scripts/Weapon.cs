@@ -31,6 +31,7 @@ public class Weapon : MonoBehaviour
     public float maxMin;
     public float minSpeed;
     public GameObject[] minions;
+    public AudioSource aud;
     void Start()
     {
         flaskSpeed = projSpeed;
@@ -85,6 +86,7 @@ public class Weapon : MonoBehaviour
         plyer = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         if (!cool && melee)
         {
+            aud.Play();
             cool = true;
             a = Instantiate(attack, (weaponSlot.transform.position + weaponSlot.transform.up), weaponSlot.transform.rotation, weaponSlot.transform);
             a.transform.rotation = Quaternion.Euler(0f, 0f, plyer.angleDeg);
@@ -93,6 +95,7 @@ public class Weapon : MonoBehaviour
         }
         if (!cool &&  ranged)
         {
+            aud.Play();
             cool = true;
             a = Instantiate(attack, (weaponSlot.transform.position + weaponSlot.transform.up), weaponSlot.transform.rotation);
             r = a.GetComponent<Rigidbody2D>();
@@ -105,6 +108,7 @@ public class Weapon : MonoBehaviour
             cool = true;
             if (minNum < maxMin)
             {
+                aud.Play();
                 GameObject m = Instantiate(attack, (weaponSlot.transform.position + weaponSlot.transform.up), weaponSlot.transform.rotation);
                 minNum++;
                 plyer.c = true;
