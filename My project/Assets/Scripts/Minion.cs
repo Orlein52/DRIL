@@ -26,6 +26,11 @@ public class Minion : MonoBehaviour
     void Update()
     {
         minDmg = plyct.tempdmg;
+        if (plyct.ro)
+        {
+            transform.position = (plyer.transform.position + Vector3.up);
+        }
+
         if (enemy)
         {
             float angleRad = Mathf.Atan2(enemy.transform.position.y - transform.position.y, enemy.transform.position.x - transform.position.x);

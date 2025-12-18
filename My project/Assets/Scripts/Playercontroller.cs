@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public bool f;
     bool bs;
     bool invcin;
+    public bool ro;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -155,8 +156,10 @@ public class PlayerController : MonoBehaviour
         }
         if (other.tag == "Room")
         {
+            ro = true;
             Rooms r = other.gameObject.GetComponent<Rooms>();
             r.RoomStart();
+            ro = false;
         }
         if (other.tag == "enemy")
         {

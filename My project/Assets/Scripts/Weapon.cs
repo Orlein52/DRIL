@@ -30,6 +30,7 @@ public class Weapon : MonoBehaviour
     public float minNum;
     public float maxMin;
     public float minSpeed;
+    public GameObject[] minions;
     void Start()
     {
         flaskSpeed = projSpeed;
@@ -104,7 +105,7 @@ public class Weapon : MonoBehaviour
             cool = true;
             if (minNum < maxMin)
             {
-                Instantiate(attack, (weaponSlot.transform.position + weaponSlot.transform.up), weaponSlot.transform.rotation);
+                GameObject m = Instantiate(attack, (weaponSlot.transform.position + weaponSlot.transform.up), weaponSlot.transform.rotation);
                 minNum++;
                 plyer.c = true;
             }
