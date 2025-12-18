@@ -12,6 +12,7 @@ public class Minion : MonoBehaviour
     PlayerController plyct;
     GameObject plyer;
     public float minDmg;
+    float dis;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,13 +37,23 @@ public class Minion : MonoBehaviour
         }
         if (enemy == null)
         {
+            dis = Vector3.Distance(transform.position, plyer.transform.position);
             col.enabled = true;
+            col.offset = Vector2.right * 1000;
+            col.offset = Vector2.zero;
             float angleRad = Mathf.Atan2(plyer.transform.position.y - transform.position.y, plyer.transform.position.x - transform.position.x);
             float angleDeg = (180 / Mathf.PI) * angleRad - 0;
             transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
-            direction = (plyer.transform.position - transform.position);
-            ray = new Ray2D(transform.position, direction);
-            rb.linearVelocity = (ray.direction * speed);
+            if (dis > 1)
+            {
+                direction = (plyer.transform.position - transform.position);
+                ray = new Ray2D(transform.position, direction);
+                rb.linearVelocity = (ray.direction * speed);
+            }
+            if (dis <= 1)
+            {
+                rb.linearVelocity = Vector3.zero;
+            }
         }
     }
 }

@@ -160,7 +160,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   c: 0
   exp: 1
-  nextLvl: 1
+  nextLvl: 0
   f: 0
 --- !u!114 &107375961482825620
 MonoBehaviour:

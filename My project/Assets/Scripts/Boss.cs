@@ -69,6 +69,7 @@ public class Boss : MonoBehaviour
             }
             if (t &&  tNum > 4)
             {
+                cool = true;
                 StartCoroutine("AtkCool");
             }
             if (health <= 0)
@@ -130,7 +131,7 @@ public class Boss : MonoBehaviour
         t = false;
         yield return new WaitForSeconds(atkcoolD);
         int s = Random.Range(0, 2);
-        atkcoolD -= 0.01f;
+        atkcoolD -= 0.001f;
         if (s == 0)
             Laser();
         if (s == 1)

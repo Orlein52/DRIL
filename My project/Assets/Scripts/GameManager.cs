@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
     Image healthbar;
     GameObject death;
     public int doneRooms;
+    public float pmhealth;
+    public float phealth;
     void Start()
     {
         conNum = 0;
@@ -77,7 +79,7 @@ public class GameManager : MonoBehaviour
     {
         if (a)
         {
-            healthbar.fillAmount = (playerController.health / playerController.maxHealth);
+            healthbar.fillAmount = (phealth / pmhealth);
             if (floorNum == 0)
             {
                 m = Instantiate(mazes[0], roomPos, transform.rotation);

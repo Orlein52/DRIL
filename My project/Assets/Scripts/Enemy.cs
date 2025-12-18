@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     Vector2 go;
     Vector3 perchance;
     public GameObject healthCol;
+    bool marked;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -91,12 +92,6 @@ public class Enemy : MonoBehaviour
         {
             plyr.f = true;
         }
-        if (other.tag == "Minion" && rooms.d)
-        {
-            Minion m = other.gameObject.GetComponent<Minion>();
-            m.enemy = gameObject;
-            m.col.enabled = false;
-        }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -112,6 +107,14 @@ public class Enemy : MonoBehaviour
         {
             health -= plyr.tempdmg;
         }
+        if (other.tag == "Minion" && rooms.d && !marked)
+        {
+            Minion m = other.gameObject.GetComponent<Minion>();
+            m.enemy = gameObject;
+            m.col.enabled = false;
+            marked = true;
+        }
+
     }
     IEnumerator fireCooldown()
     {

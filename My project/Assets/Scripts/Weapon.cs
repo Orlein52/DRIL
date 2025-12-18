@@ -77,6 +77,7 @@ public class Weapon : MonoBehaviour
             atkCool = (1 / (plyer.DEX * 0.2f));
         }
         maxMin = (plyer.intelligence/2);
+        minSpeed = (plyer.intelligence / 2);
     }
     public void Attack()
     {

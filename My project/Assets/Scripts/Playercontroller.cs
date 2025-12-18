@@ -67,6 +67,8 @@ public class PlayerController : MonoBehaviour
         tempmove.y = inputY * speed;
         rb.linearVelocityX = (tempmove.x);
         rb.linearVelocityY = (tempmove.y);
+        gameManager.pmhealth = maxHealth;
+        gameManager.phealth = health;
         if (atking)
         {
             currentWeapon.Attack();
@@ -92,7 +94,9 @@ public class PlayerController : MonoBehaviour
             gameManager.Death();
         }
         if (health > maxHealth)
-        { 
+        {
+            cam.transform.SetParent(transform);
+            cam.transform.position = transform.position;
             health = maxHealth; 
         }
     }
