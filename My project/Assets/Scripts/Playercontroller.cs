@@ -122,12 +122,12 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Enem_Proj" && !bs && !invcin)
         {
-            health -= 20 - (((2 * intelligence) + 10) / ((2 * intelligence + 10) + 35));
+            health -= (40 * (gameManager.floorNum/2)) - (((2 * intelligence) + 10) / ((2 * intelligence + 10) + 35));
             StartCoroutine("IFrames");
         }
         if (other.tag == "Enem_Proj" && bs && !invcin)
         {
-            health -= 100 - (((2 * intelligence) + 10) / ((2 * intelligence + 10) + 35));
+            health -= (100 * (gameManager.floorNum/2)) - (((2 * intelligence) + 10) / ((2 * intelligence + 10) + 35));
             StartCoroutine("IFrames");
         }
         if (other.tag == "Exit_N" && !maybe)
@@ -182,7 +182,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy" && !invcin)
         {
-            health -= 3;
             Enemy e = other.gameObject.GetComponent<Enemy>();
             health -= e.dmg - (defense / (defense + 35));
             StartCoroutine("IFrames");

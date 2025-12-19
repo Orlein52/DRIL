@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -5513050994037168576, guid: 1e51ad7d9e01c6f4faba71a77c0a06ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   dmg: 0
   projDMG: 0
   a: 0
-  proj: {fileID: 1840503616893457093, guid: 2093079179d97ae44881402e1c4433b0, type: 3}
+  proj: {fileID: 1840503616893457093, guid: 6e9526521428443499a7df640086d4bc, type: 3}
   minion: {fileID: 0}
   idk: {fileID: 0}
   atkTran: {fileID: 5895073094024951930}

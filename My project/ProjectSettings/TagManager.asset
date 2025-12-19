@@ -35,6 +35,12 @@ TagManager:
   - UI_Death
   - Health_Col
   - Minion
+  - UI_STR
+  - UI_CON
+  - UI_INT
+  - UI_DEX
+  - UI_EXP
+  - UI_Win
   layers:
   - Default
   - TransparentFX

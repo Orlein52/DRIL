@@ -28,12 +28,17 @@ public class Enemy : MonoBehaviour
     Vector3 perchance;
     public GameObject healthCol;
     bool marked;
+    GameManager gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
         rb = GetComponent<Rigidbody2D>();
         plyr = player.GetComponent<PlayerController>();
+        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
+        health = health * gameManager.floorNum;
+        dmg = dmg * (gameManager.floorNum / 2);
+        exp = exp * gameManager.floorNum;
     }
 
     // Update is called once per frame

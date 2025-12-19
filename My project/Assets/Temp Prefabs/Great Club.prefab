@@ -107,7 +107,7 @@ MonoBehaviour:
   atkCool: 0.5
   projSpeed: 0
   projLife: 1
-  attack: {fileID: 5669693107287501803, guid: 9fdef0877a199c14e9caa5da9693f057, type: 3}
+  attack: {fileID: 3414756041530187191, guid: 03869d6f31af3874ba89c9bf52aebfe2, type: 3}
   weaponSlot: {fileID: 0}
   plyer: {fileID: 0}
   dmg: 50
@@ -133,7 +133,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 6b282ffea30158845952d418593841d0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

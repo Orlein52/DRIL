@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] spawnRooms;
     public GameObject[] players;
     public GameObject bossTile;
-    Transform player;
+    GameObject player;
     float roomNum;
     public GameObject connector;
     public int conNum;
@@ -57,6 +58,12 @@ public class GameManager : MonoBehaviour
     public int doneRooms;
     public float pmhealth;
     public float phealth;
+    public AudioResource menu;
+    public AudioResource boss;
+    public AudioSource music;
+    TextMeshProUGUI pltext;
+    Image exp;
+    GameObject win;
     void Start()
     {
         conNum = 0;
@@ -68,18 +75,22 @@ public class GameManager : MonoBehaviour
         healthbar = GameObject.FindGameObjectWithTag("Health").GetComponent<Image>();
         health = GameObject.FindGameObjectWithTag("UI_Health");
         death = GameObject.FindGameObjectWithTag("UI_Death");
+        exp = GameObject.FindGameObjectWithTag("UI_EXP").GetComponent<Image>();
+        win = GameObject.FindGameObjectWithTag("UI_Win");
         bobWepSel.SetActive(false);
         billWepSel.SetActive(false);
         beccaWepSel.SetActive(false);
         LVL.SetActive(false);
         health.SetActive(false);
         death.SetActive(false);
+        win.SetActive(false);
     }
     void Update()
     {
         if (a)
         {
             healthbar.fillAmount = (phealth / pmhealth);
+            exp.fillAmount = playerController.exp / playerController.nextLvl;
             if (floorNum == 0)
             {
                 m = Instantiate(mazes[0], roomPos, transform.rotation);
@@ -128,25 +139,26 @@ public class GameManager : MonoBehaviour
                 exits[1].GetComponent<Collider2D>().isTrigger = false;
                 exits[2].GetComponent<Collider2D>().isTrigger = false;
                 exits[3].GetComponent<Collider2D>().isTrigger = false;
+                int t = UnityEngine.Random.Range(0, (mazes.Length - 1));
                 if (playerController.exitNum == 1)
                 {
                     player.transform.position -= Vector3.up * 100;
-                    m = Instantiate(mazes[0], transform.position, transform.rotation);
+                    m = Instantiate(mazes[t], transform.position, transform.rotation);
                 }
                 if (playerController.exitNum == 0)
                 {
                     player.transform.position += Vector3.up * 100;
-                    m = Instantiate(mazes[0], transform.position, transform.rotation);
+                    m = Instantiate(mazes[t], transform.position, transform.rotation);
                 }
                 if (playerController.exitNum == 3)
                 {
                     player.transform.position += Vector3.left * 100;
-                    m = Instantiate(mazes[0], transform.position, transform.rotation);
+                    m = Instantiate(mazes[t], transform.position, transform.rotation);
                 }
                 if (playerController.exitNum == 2)
                 {
                     player.transform.position += Vector3.right * 100;
-                    m = Instantiate(mazes[0], transform.position, transform.rotation);
+                    m = Instantiate(mazes[t], transform.position, transform.rotation);
                 }
                 playerController.maybe = false;
                 RoomSpawn();
@@ -159,6 +171,7 @@ public class GameManager : MonoBehaviour
                 exits[1].GetComponent<Collider2D>().isTrigger = false;
                 exits[2].GetComponent<Collider2D>().isTrigger = false;
                 exits[3].GetComponent<Collider2D>().isTrigger = false;
+                music.resource = boss;
                 if (playerController.exitNum == 1)
                 {
                     player.transform.position += Vector3.up * 100;
@@ -254,7 +267,7 @@ public class GameManager : MonoBehaviour
         health.SetActive(true);
         GameObject p = Instantiate(players[playerNum], transform.position, transform.rotation);
         playerController = p.GetComponent<PlayerController>();
-        player = p.transform;
+        player = p;
         MazeSpawn();
         Camera.main.transform.SetParent(player.transform, true);
         Camera.main.transform.position = player.transform.position + (Vector3.back * 10);
@@ -267,6 +280,22 @@ public class GameManager : MonoBehaviour
         LVL.SetActive(true);
         LVLpoints = 4;
         l = false;
+        if (playerNum == 0)
+        {
+            pltext = GameObject.FindGameObjectWithTag("UI_DEX").GetComponent<TextMeshProUGUI>();
+            pltext.text = "Firerate + DMG";
+        }
+        else if (playerNum == 1)
+        {
+            pltext = GameObject.FindGameObjectWithTag("UI_STR").GetComponent<TextMeshProUGUI>();
+            pltext.text += "Melee DMG Reduction + DMG";
+        }
+        else if (playerNum == 2)
+        {
+            pltext = GameObject.FindGameObjectWithTag("UI_INT").GetComponent<TextMeshProUGUI>();
+            pltext.text += "Ranged DMG Reduction + DMG";
+        }
+
     }
     public void CON()
     {
@@ -313,9 +342,9 @@ public class GameManager : MonoBehaviour
     public void Death()
     {
         health.SetActive(false);
-        Destroy(m);
         Time.timeScale = 0;
         death.SetActive(true);
+        Destroy(m);
     }
     public void Resp()
     {
@@ -325,6 +354,29 @@ public class GameManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+    public void BossKill()
+    {
+        music.resource = menu;
+        if (floorNum < 3)
+        {
+            floorNum++;
+            Destroy(m);
+            player.transform.position = Vector3.zero;
+            m = Instantiate(mazes[0], roomPos, transform.rotation);
+            playerController.health = playerController.maxHealth;
+            RoomSpawn();
+            floorsize++;
+        }
+        // Win Screen
+        else
+        {
+            win.SetActive(true);
+            health.SetActive(false);
+            Time.timeScale = 0;
+            Destroy(m);
+            Destroy(player);
+        }
     }
 }
 

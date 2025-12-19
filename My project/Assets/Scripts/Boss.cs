@@ -27,6 +27,7 @@ public class Boss : MonoBehaviour
     bool t;
     public int tNum;
     public int rotNum;
+    GameManager gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,6 +35,7 @@ public class Boss : MonoBehaviour
         plyr = player.GetComponent<PlayerController>();
         rooms = GetComponentInParent<Rooms>();
         ArrayUtility.Add(ref rooms.enemies, gameObject);
+        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -51,7 +53,7 @@ public class Boss : MonoBehaviour
                 float angleRad = Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x);
                 float angleDeg = (180 / Mathf.PI) * angleRad - 0;
                 atkTran.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg - 90);
-                GameObject at = Instantiate(proj, atkTran.position, atkTran.rotation);
+                GameObject at = Instantiate(proj, atkTran.position, atkTran.rotation, transform);
                 Rigidbody2D r = at.GetComponent<Rigidbody2D>();
                 r.linearVelocity = (at.transform.up * 20);
                 Destroy(at, projLife);
@@ -59,7 +61,7 @@ public class Boss : MonoBehaviour
             }
             if (t && !cool)
             {
-                GameObject at = Instantiate(proj, atkTran.position, atkTran.rotation);
+                GameObject at = Instantiate(proj, atkTran.position, atkTran.rotation, transform);
                 Rigidbody2D r = at.GetComponent<Rigidbody2D>();
                 r.linearVelocity = (at.transform.up * 5);
                 Destroy(at, projLife);
@@ -79,7 +81,9 @@ public class Boss : MonoBehaviour
                 Camera.main.transform.SetParent(player.transform.transform);
                 Camera.main.transform.position = player.transform.position;
                 Camera.main.orthographicSize = 5;
+                gameManager.BossKill();
                 Destroy(gameObject);
+
             }
         }
     }
