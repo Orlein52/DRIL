@@ -49,5 +49,6 @@ public class Rooms : MonoBehaviour
         b = true;
         a= false;
         sealNum = 0;
+        gameManager.doneRooms++;
     }
 }

@@ -26,12 +26,19 @@ public class Enemy : MonoBehaviour
     public float projDMG;
     Vector2 go;
     Vector3 perchance;
+    public GameObject healthCol;
+    bool marked;
+    GameManager gameManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
         rb = GetComponent<Rigidbody2D>();
         plyr = player.GetComponent<PlayerController>();
+        gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
+        health = health * gameManager.floorNum;
+        dmg = dmg * (gameManager.floorNum / 2);
+        exp = exp * gameManager.floorNum;
     }
 
     // Update is called once per frame
@@ -67,6 +74,9 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             plyr.exp += exp;
+            float s = Random.Range(0, 20);
+            if (s == 0)
+                Instantiate(healthCol, transform.position, transform.rotation);
             ArrayUtility.Remove(ref rooms.enemies, gameObject);
             Destroy(gameObject);
         }
@@ -83,6 +93,33 @@ public class Enemy : MonoBehaviour
             ArrayUtility.Add(ref rooms.enemies, gameObject);
             a = true;
         }
+        if (other.tag == "Flask")
+        {
+            plyr.f = true;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Minion")
+        {
+            Minion m = other.gameObject.GetComponent<Minion>();
+            health -= m.minDmg;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "Flask_Proj")
+        {
+            health -= plyr.tempdmg;
+        }
+        if (other.tag == "Minion" && rooms.d && !marked)
+        {
+            Minion m = other.gameObject.GetComponent<Minion>();
+            m.enemy = gameObject;
+            m.col.enabled = false;
+            marked = true;
+        }
+
     }
     IEnumerator fireCooldown()
     {

@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
     public bool c;
     public float exp;
     public float nextLvl;
+    public bool f;
+    bool bs;
+    bool invcin;
+    public bool ro;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -64,6 +68,8 @@ public class PlayerController : MonoBehaviour
         tempmove.y = inputY * speed;
         rb.linearVelocityX = (tempmove.x);
         rb.linearVelocityY = (tempmove.y);
+        gameManager.pmhealth = maxHealth;
+        gameManager.phealth = health;
         if (atking)
         {
             currentWeapon.Attack();
@@ -78,6 +84,21 @@ public class PlayerController : MonoBehaviour
             exp = 0;
             nextLvl = nextLvl * 1.5f;
             gameManager.LVLUP();
+        }
+        if (f)
+        {
+            f = false;
+            currentWeapon.FlaskBreak();
+        }
+        if (health <= 0)
+        {
+            gameManager.Death();
+        }
+        if (health > maxHealth)
+        {
+            cam.transform.SetParent(transform);
+            cam.transform.position = transform.position;
+            health = maxHealth; 
         }
     }
     public void Move(InputAction.CallbackContext context)
@@ -99,11 +120,17 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Enem_Proj")
+        if (other.tag == "Enem_Proj" && !bs && !invcin)
         {
-            health -= 20 - (((2 * intelligence) + 10) / ((2 * intelligence + 10) + 35));
+            health -= (40 * (gameManager.floorNum/2)) - (((2 * intelligence) + 10) / ((2 * intelligence + 10) + 35));
+            StartCoroutine("IFrames");
         }
-        if(other.tag == "Exit_N" && !maybe)
+        if (other.tag == "Enem_Proj" && bs && !invcin)
+        {
+            health -= (100 * (gameManager.floorNum/2)) - (((2 * intelligence) + 10) / ((2 * intelligence + 10) + 35));
+            StartCoroutine("IFrames");
+        }
+        if (other.tag == "Exit_N" && !maybe)
         {
             maybe = true;
             exitNum = 1;
@@ -129,8 +156,10 @@ public class PlayerController : MonoBehaviour
         }
         if (other.tag == "Room")
         {
+            ro = true;
             Rooms r = other.gameObject.GetComponent<Rooms>();
             r.RoomStart();
+            ro = false;
         }
         if (other.tag == "enemy")
         {
@@ -138,16 +167,31 @@ public class PlayerController : MonoBehaviour
             cam.transform.SetParent(b.transform);
             cam.transform.position = b.transform.position + (Vector3.back * 10);
             cam.orthographicSize = 10;
+            Boss boss = b.GetComponent<Boss>();
+            boss.a = true;
+            boss.start = true;
+            bs = true;
+        }
+        if (other.tag == "Health_Col")
+        {
+            Destroy(other.gameObject);
+            health += (0.2f * maxHealth);
         }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" && !invcin)
         {
-            health -= 3;
             Enemy e = other.gameObject.GetComponent<Enemy>();
             health -= e.dmg - (defense / (defense + 35));
+            StartCoroutine("IFrames");
         }
+    }
+    IEnumerator IFrames()
+    {
+        invcin = true;
+        yield return new WaitForSeconds(0.5f);
+        invcin = false;
     }
     IEnumerator Atkcool()
     {

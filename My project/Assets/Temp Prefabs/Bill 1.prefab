@@ -200,8 +200,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< HEAD:My project/Assets/Temp Prefabs/Bill 1.prefab
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0.122686625, b: 1, a: 0}
+=======
+  m_Sprite: {fileID: 4483504832982471387, guid: f3ffe75137b9a2a4caefa059a8b634ab, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+>>>>>>> 3d66788831fb6213af1b50b65f9ab9d417492410:My project/Assets/Temp Prefabs/Bill.prefab
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -237,8 +242,13 @@ MonoBehaviour:
   exitNum: 0
   weaponSlot: {fileID: 7139063247267617100}
   tempHit: {fileID: 1722656276147000784, guid: 7eb57077b168a6347aac300b4a1706fe, type: 3}
+<<<<<<< HEAD:My project/Assets/Temp Prefabs/Bill 1.prefab
   health: 0
   maxHealth: 0
+=======
+  health: 100
+  maxHealth: 100
+>>>>>>> 3d66788831fb6213af1b50b65f9ab9d417492410:My project/Assets/Temp Prefabs/Bill.prefab
   tempdmg: 6
   rof: 1
   maybe: 0
@@ -249,7 +259,13 @@ MonoBehaviour:
   c: 0
   exp: 0
   nextLvl: 15
+<<<<<<< HEAD:My project/Assets/Temp Prefabs/Bill 1.prefab
 --- !u!114 &6950267651422123387
+=======
+  f: 0
+  ro: 0
+--- !u!114 &5497071125617698208
+>>>>>>> 3d66788831fb6213af1b50b65f9ab9d417492410:My project/Assets/Temp Prefabs/Bill.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -417,8 +433,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 2.52, y: 5.97}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -437,7 +452,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
