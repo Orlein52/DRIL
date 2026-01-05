@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
     }
     public void MazeSpawn()
     {
-        ArrayUtility.Clear(ref spawnRooms);
+        Array.Clear(spawnRooms, 0, spawnRooms.Length);
         if (floorNum > 0)
         {
             if (tileNum < floorsize)
@@ -206,24 +206,24 @@ public class GameManager : MonoBehaviour
             {
                 roomNum = UnityEngine.Random.Range(0, bigRooms.Length - 1);
                 Instantiate(bigRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
-                ArrayUtility.RemoveAt(ref spawnRooms, 0);
+                Array.Clear(spawnRooms, 0, 1);
             }
             if (spawnRooms[0].tag == roomTag[1])
             {
                 roomNum = UnityEngine.Random.Range(0, smallRooms.Length - 1);
                 Instantiate(smallRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
-                ArrayUtility.RemoveAt(ref spawnRooms, 0);
+                Array.Clear(spawnRooms, 0, 1);
             }
             if (spawnRooms[0].tag == roomTag[2])
             {
                 roomNum = UnityEngine.Random.Range(0, medRooms.Length - 1);
                 Instantiate(medRooms[0], spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
-                ArrayUtility.RemoveAt(ref spawnRooms, 0);
+                Array.Clear(spawnRooms, 0, 1);
             }
             if (spawnRooms[0].tag == roomTag[3])
             {
                 Instantiate(bossTile, spawnRooms[0].transform.position, spawnRooms[0].transform.rotation, m.transform);
-                ArrayUtility.RemoveAt(ref spawnRooms, 0);
+                Array.Clear(spawnRooms, 0, 1);
             }
         }
     }

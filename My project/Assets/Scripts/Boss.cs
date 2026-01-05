@@ -34,7 +34,7 @@ public class Boss : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").gameObject;
         plyr = player.GetComponent<PlayerController>();
         rooms = GetComponentInParent<Rooms>();
-        ArrayUtility.Add(ref rooms.enemies, gameObject);
+        rooms.enemies++;
         gameManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
     }
 
@@ -77,7 +77,7 @@ public class Boss : MonoBehaviour
             if (health <= 0)
             {
                 plyr.exp += exp;
-                ArrayUtility.Remove(ref rooms.enemies, gameObject);
+                rooms.enemies--;
                 Camera.main.transform.SetParent(player.transform.transform);
                 Camera.main.transform.position = player.transform.position;
                 Camera.main.orthographicSize = 5;

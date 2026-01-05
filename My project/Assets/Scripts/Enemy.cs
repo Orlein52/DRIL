@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using static UnityEngine.Rendering.DebugUI.Table;
-using UnityEditor;
+using System;
+
 
 public class Enemy : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class Enemy : MonoBehaviour
     public GameObject healthCol;
     bool marked;
     GameManager gameManager;
+    int enNum;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -74,10 +76,11 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             plyr.exp += exp;
-            float s = Random.Range(0, 20);
+            float s = UnityEngine.Random.Range(0, 20);
             if (s == 0)
                 Instantiate(healthCol, transform.position, transform.rotation);
-            ArrayUtility.Remove(ref rooms.enemies, gameObject);
+            rooms.enemies--;
+            
             Destroy(gameObject);
         }
     }
@@ -90,7 +93,7 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Room")
         {
             rooms = other.gameObject.GetComponent<Rooms>();
-            ArrayUtility.Add(ref rooms.enemies, gameObject);
+            rooms.enemies++;
             a = true;
         }
         if (other.tag == "Flask")

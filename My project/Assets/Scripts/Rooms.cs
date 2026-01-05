@@ -5,7 +5,7 @@ using UnityEngine;
 public class Rooms : MonoBehaviour
 {
     GameManager gameManager;
-    public GameObject[] enemies;
+    public int enemies;
     bool a;
     public bool d;
     public GameObject[] seals;
@@ -20,11 +20,11 @@ public class Rooms : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemies.Length > 0)
+        if (enemies > 0)
         {
             a = true;
         }
-        if (a && enemies.Length <= 0)
+        if (a && enemies <= 0)
         {
             RoomDone();
         }
